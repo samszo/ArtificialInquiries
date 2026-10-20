@@ -1,0 +1,1090 @@
+@prefix artinq: <https://humanum-p8.fr/omk_artificialinquiries/onto/artinq#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix o: <http://omeka.org/s/vocabs/o#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://humanum-p8.fr/omk_artificialinquiries/onto/artinq#> a owl:Ontology ;
+    dcterms:title "Artificial Inquiries — vocabulaire commun"@fr ;
+    dcterms:description "Vocabulaire commun recommandé, obtenu par rapprochement sémantique des classes et propriétés des vocabulaires produits pour les exercices du vademecum Artificial Inquiries. Chaque terme indique dans skos:scopeNote les termes d'origine qu'il remplace."@fr ;
+    owl:versionInfo "1.0" ;
+    skos:editorialNote "Non retenu : Ex. 2.b TaskManager — entité technique de l'application, pas un concept du domaine"@fr ;
+    skos:editorialNote "Non retenu : Ex. 11 fichier — géré nativement par les médias Omeka"@fr ;
+    skos:editorialNote "Non retenu : Ex. 11 typeMime — géré nativement par les médias Omeka"@fr ;
+    skos:editorialNote "Non retenu : Ex. 13 frequencyScore ; Ex. 13 professionalStakesScore ; Ex. 13 expertiseRequiredScore ; Ex. 13 effortResourcesScore ; Ex. 13 collaborationScore ; Ex. 13 errorToleranceScore ; Ex. 13 standardisationScore ; Ex. 13 professionalPrideScore — remplacés par des instances de artinq:Critere notées via artinq:ScoreCritere"@fr .
+
+# ────────────────────────────────────────────────────────────
+# CLASSES
+# ────────────────────────────────────────────────────────────
+
+artinq:Participant a rdfs:Class ;
+    rdfs:label "Participant"@fr, "Participant"@en ;
+    rdfs:comment "Personne qui réalise un ou plusieurs exercices du vademecum."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Participant ; Ex. 2.a Utilisateur ; Ex. 3.a Participant ; Ex. 4 Participant ; Ex. 5 Participant ; Ex. 8 Partner ; Ex. 11 Participant"@fr ;
+    vs:term_status "testing" .
+
+artinq:Exercice a rdfs:Class ;
+    rdfs:label "Exercice"@fr, "Exercise"@en ;
+    rdfs:comment "Exercice du vademecum Artificial Inquiries (numéro, bloc, consigne)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Exercice ; Ex. 6.c Exercice6c ; Ex. 8 Exercise ; Ex. 11 Exercice"@fr ;
+    vs:term_status "testing" .
+
+artinq:Question a rdfs:Class ;
+    rdfs:label "Question"@fr, "Question"@en ;
+    rdfs:comment "Question ou consigne d'un exercice à laquelle le participant répond."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Question"@fr ;
+    vs:term_status "testing" .
+
+artinq:Passation a rdfs:Class ;
+    rdfs:label "Passation"@fr, "Session"@en ;
+    rdfs:comment "Séance au cours de laquelle un participant réalise un exercice, à une date et un moment donnés."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Passation ; Ex. 3.a SessionImpressions ; Ex. 3.b Parcours"@fr ;
+    vs:term_status "testing" .
+
+artinq:Reponse a rdfs:Class ;
+    rdfs:label "Réponse"@fr, "Answer"@en ;
+    rdfs:comment "Réponse d'un participant à une question pendant une passation (classe abstraite)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Reponse"@fr ;
+    vs:term_status "testing" .
+
+artinq:ReponseDessin a rdfs:Class ;
+    rdfs:label "Réponse dessin"@fr, "Drawing answer"@en ;
+    rdfs:comment "Réponse dessinée, composée de traits ; l'image est jointe en média."@fr ;
+    rdfs:subClassOf artinq:Reponse ;
+    skos:scopeNote "Rapprochements : Ex. 1 ReponseDessin"@fr ;
+    vs:term_status "testing" .
+
+artinq:ReponseTexte a rdfs:Class ;
+    rdfs:label "Réponse texte"@fr, "Text answer"@en ;
+    rdfs:comment "Réponse écrite à une question."@fr ;
+    rdfs:subClassOf artinq:Reponse ;
+    skos:scopeNote "Rapprochements : Ex. 1 ReponseTexte"@fr ;
+    vs:term_status "testing" .
+
+artinq:Trait a rdfs:Class ;
+    rdfs:label "Trait"@fr, "Stroke"@en ;
+    rdfs:comment "Trait d'un dessin : outil, couleur, épaisseur et points."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 1 Trait"@fr ;
+    vs:term_status "testing" .
+
+artinq:Tache a rdfs:Class ;
+    rdfs:label "Tâche"@fr, "Task"@en ;
+    rdfs:comment "Tâche (professionnelle ou personnelle) décrite par le participant et éventuellement confiée à un LLM."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 2.a Tache ; Ex. 2.b Task ; Ex. 3.a TacheDeleguee ; Ex. 6 Task ; Ex. 6 CoreTask ; Ex. 6.c Tache ; Ex. 7.b Tache ; Ex. 8 Task ; Ex. 10.a Task"@fr ;
+    vs:term_status "testing" .
+
+artinq:CategorieTache a rdfs:Class ;
+    rdfs:label "Catégorie de tâche"@fr, "Task category"@en ;
+    rdfs:comment "Catégorie servant à classer des tâches ou des conversations (ex. BUSINESS, PLEASURE)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 3.b Categorie ; Ex. 4 CategorieTache ; Ex. 6 Category"@fr ;
+    vs:term_status "testing" .
+
+artinq:Role a rdfs:Class ;
+    rdfs:label "Rôle"@fr, "Role"@en ;
+    rdfs:comment "Rôle ou responsabilité attribué soit à l'IA, soit conservé par l'humain."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 2.b AIRole ; Ex. 2.b HumanResponsibility"@fr ;
+    vs:term_status "testing" .
+
+artinq:LLM a rdfs:Class ;
+    rdfs:label "Modèle de langage (LLM)"@fr, "Language model"@en ;
+    rdfs:comment "Modèle d'IA utilisé (ChatGPT, Claude, Mistral…)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 4 LLM ; Ex. 5 LLM ; Ex. 7.b ModeleIA ; Ex. 8 Model ; Ex. 10.a LLM"@fr ;
+    vs:term_status "testing" .
+
+artinq:Prompt a rdfs:Class ;
+    rdfs:label "Prompt"@fr, "Prompt"@en ;
+    rdfs:comment "Instruction donnée à un LLM pour réaliser une tâche."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 10.a Prompt"@fr ;
+    vs:term_status "testing" .
+
+artinq:Test a rdfs:Class ;
+    rdfs:label "Test"@fr, "Test"@en ;
+    rdfs:comment "Soumission d'un même prompt à un ou plusieurs LLM."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 7.b Test"@fr ;
+    vs:term_status "testing" .
+
+artinq:ReponseLLM a rdfs:Class ;
+    rdfs:label "Réponse d'un LLM"@fr, "LLM output"@en ;
+    rdfs:comment "Résultat produit par un LLM lors d'un test ou d'une tâche."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 7.b Reponse ; Ex. 8 Response ; Ex. 10.a Result"@fr ;
+    vs:term_status "testing" .
+
+artinq:CodeAnonyme a rdfs:Class ;
+    rdfs:label "Code d'anonymisation"@fr, "Blind code"@en ;
+    rdfs:comment "Code (ex. nom d'animal) qui masque l'identité d'un LLM pendant un test à l'aveugle."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 8 AnimalCode"@fr ;
+    vs:term_status "testing" .
+
+artinq:Historique a rdfs:Class ;
+    rdfs:label "Historique de conversations"@fr, "Conversation history"@en ;
+    rdfs:comment "Ensemble des conversations d'un participant avec des LLM."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 3.b Historique"@fr ;
+    vs:term_status "testing" .
+
+artinq:Conversation a rdfs:Class ;
+    rdfs:label "Conversation"@fr, "Conversation"@en ;
+    rdfs:comment "Conversation entre un participant et un LLM."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 3.b Conversation ; Ex. 5 Conversation"@fr ;
+    vs:term_status "testing" .
+
+artinq:ConversationMarquante a rdfs:Class ;
+    rdfs:label "Conversation marquante"@fr, "Memorable conversation"@en ;
+    rdfs:comment "Conversation qui a laissé une impression durable."@fr ;
+    rdfs:subClassOf artinq:Conversation ;
+    skos:scopeNote "Rapprochements : Ex. 3.a ConversationMarquante ; Ex. 3.b ConversationMemorable ; Ex. 4 ConversationMemorable"@fr ;
+    vs:term_status "testing" .
+
+artinq:Echange a rdfs:Class ;
+    rdfs:label "Échange"@fr, "Exchange"@en ;
+    rdfs:comment "Un message du participant et la réponse du LLM au sein d'une conversation."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 5 Interaction"@fr ;
+    vs:term_status "testing" .
+
+artinq:Emotion a rdfs:Class ;
+    rdfs:label "Émotion"@fr, "Emotion"@en ;
+    rdfs:comment "Émotion associée à une conversation (enthousiasme, frustration, surprise…)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 4 Emotion"@fr ;
+    vs:term_status "testing" .
+
+artinq:TypeImpact a rdfs:Class ;
+    rdfs:label "Type d'impact"@fr, "Impact type"@en ;
+    rdfs:comment "Nature de l'impact d'une conversation sur le participant."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 4 TypeImpact"@fr ;
+    vs:term_status "testing" .
+
+artinq:Terme a rdfs:Class ;
+    rdfs:label "Terme"@fr, "Term"@en ;
+    rdfs:comment "Mot de remplacement pour désigner un interlocuteur (humain ou LLM)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 5 Terme"@fr ;
+    vs:term_status "testing" .
+
+artinq:Substitution a rdfs:Class ;
+    rdfs:label "Substitution"@fr, "Substitution"@en ;
+    rdfs:comment "Tour de substitution attribuant de nouveaux rôles au participant et au LLM."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 5 Substitution"@fr ;
+    vs:term_status "testing" .
+
+artinq:Evaluation a rdfs:Class ;
+    rdfs:label "Évaluation"@fr, "Evaluation"@en ;
+    rdfs:comment "Jugement porté sur une tâche, un terme, une réponse ou une œuvre."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 5 EvaluationTerme ; Ex. 6 TaskAssessment ; Ex. 6.c Evaluation ; Ex. 13 Evaluation"@fr ;
+    vs:term_status "testing" .
+
+artinq:Attente a rdfs:Class ;
+    rdfs:label "Attente envers le LLM"@fr, "LLM expectation"@en ;
+    rdfs:comment "Niveau de performance attendu et critères d'échec, de résultat acceptable et de réussite."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 6 LLMExpectation ; Ex. 6.c Attentes"@fr ;
+    vs:term_status "testing" .
+
+artinq:NiveauPerformance a rdfs:Class ;
+    rdfs:label "Niveau de performance"@fr, "Performance level"@en ;
+    rdfs:comment "Échelle : TERRIBLE, PRETTY_BAD, GOOD_ENOUGH, EXCELLENT."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 6 ExpectationLevel"@fr ;
+    vs:term_status "testing" .
+
+artinq:Critere a rdfs:Class ;
+    rdfs:label "Critère"@fr, "Criterion"@en ;
+    rdfs:comment "Critère d'évaluation (fréquence, enjeux, expertise, effort, collaboration, tolérance à l'erreur, standardisation, fierté)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 13 Criterion ; Ex. 6 ResultCriteria"@fr ;
+    vs:term_status "testing" .
+
+artinq:ScoreCritere a rdfs:Class ;
+    rdfs:label "Score de critère"@fr, "Criterion score"@en ;
+    rdfs:comment "Note de 1 à 5 attribuée à un critère dans une évaluation."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 13 CriterionScore"@fr ;
+    vs:term_status "testing" .
+
+artinq:Reflexion a rdfs:Class ;
+    rdfs:label "Réflexion"@fr, "Reflection"@en ;
+    rdfs:comment "Texte de réflexion, de synthèse ou de justification rédigé par le participant."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 2.b Reflection ; Ex. 3.b Fiche ; Ex. 5 Reflexion ; Ex. 11 Reflexion ; Ex. 13 Justification"@fr ;
+    vs:term_status "testing" .
+
+artinq:Observation a rdfs:Class ;
+    rdfs:label "Observation"@fr, "Observation"@en ;
+    rdfs:comment "Observation datée sur l'usage des LLM (avant, pendant ou après)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 11 Observation"@fr ;
+    vs:term_status "testing" .
+
+artinq:Dimension a rdfs:Class ;
+    rdfs:label "Dimension"@fr, "Dimension"@en ;
+    rdfs:comment "Dimension d'analyse d'une réflexion."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 11 Dimension"@fr ;
+    vs:term_status "testing" .
+
+artinq:Exemple a rdfs:Class ;
+    rdfs:label "Exemple"@fr, "Example"@en ;
+    rdfs:comment "Exemple concret (extrait de conversation, lien) illustrant une observation."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 11 Exemple"@fr ;
+    vs:term_status "testing" .
+
+artinq:Document a rdfs:Class ;
+    rdfs:label "Document"@fr, "Document"@en ;
+    rdfs:comment "Ressource documentaire ou média associé (fichier, source, capture)."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 8 Document ; Ex. 11 Media ; Ex. 13 DocumentaryResource"@fr ;
+    vs:term_status "testing" .
+
+artinq:OeuvreExemplaire a rdfs:Class ;
+    rdfs:label "Œuvre exemplaire"@fr, "Exemplary work"@en ;
+    rdfs:comment "Travail ou document professionnel choisi pour son exemplarité."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 13 ExemplaryWork"@fr ;
+    vs:term_status "testing" .
+
+artinq:De a rdfs:Class ;
+    rdfs:label "Dé"@fr, "Die"@en ;
+    rdfs:comment "Dé utilisé pour parcourir l'historique de manière aléatoire."@fr ;
+    skos:scopeNote "Rapprochements : Ex. 3.b De"@fr ;
+    vs:term_status "testing" .
+
+# ────────────────────────────────────────────────────────────
+# PROPRIÉTÉS
+# ────────────────────────────────────────────────────────────
+
+artinq:identifiant a rdf:Property ;
+    rdfs:label "identifiant"@fr, "identifier"@en ;
+    rdfs:comment "Identifiant d'une ressource."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:scopeNote "Rapprochements : Ex. 2.a idUtilisateur ; Ex. 2.a idTache ; Ex. 6.c taskId ; Ex. 8 id ; Ex. 8 taskId ; Ex. 10.a taskId"@fr ;
+    vs:term_status "testing" .
+
+artinq:titre a rdf:Property ;
+    rdfs:label "titre"@fr, "title"@en ;
+    rdfs:comment "Titre ou intitulé d'un exercice, d'une tâche, d'une conversation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:title ;
+    skos:scopeNote "Rapprochements : Ex. 1 titre ; Ex. 2.a nomTache ; Ex. 2.b taskName ; Ex. 3.b titre ; Ex. 6.c titre ; Ex. 8 title ; Ex. 11 titreExercice"@fr ;
+    vs:term_status "testing" .
+
+artinq:nom a rdf:Property ;
+    rdfs:label "nom"@fr, "name"@en ;
+    rdfs:comment "Nom d'une personne, d'un modèle, d'une catégorie ou d'un rôle."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf foaf:name ;
+    skos:scopeNote "Rapprochements : Ex. 2.a nom ; Ex. 2.b roleName ; Ex. 2.b responsibilityName ; Ex. 3.b nom ; Ex. 4 name ; Ex. 8 name ; Ex. 10.a name"@fr ;
+    vs:term_status "testing" .
+
+artinq:description a rdf:Property ;
+    rdfs:label "description"@fr, "description"@en ;
+    rdfs:comment "Description libre."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:description ;
+    skos:scopeNote "Rapprochements : Ex. 2.b explanation ; Ex. 6.c description ; Ex. 8 description"@fr ;
+    vs:term_status "testing" .
+
+artinq:type a rdf:Property ;
+    rdfs:label "type"@fr, "type"@en ;
+    rdfs:comment "Type ou nature (valeur contrôlée, ex. DESSIN/TEXTE, EVOLUTION/CONSTANCE)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:type ;
+    skos:scopeNote "Rapprochements : Ex. 1 typeQuestion ; Ex. 5 typeTerme ; Ex. 8 type ; Ex. 10.a type ; Ex. 11 typeReflexion"@fr ;
+    vs:term_status "testing" .
+
+artinq:date a rdf:Property ;
+    rdfs:label "date"@fr, "date"@en ;
+    rdfs:comment "Date (et heure) de saisie, de passation, de test ou d'évaluation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf dcterms:date ;
+    skos:scopeNote "Rapprochements : Ex. 1 datePassation ; Ex. 3.b date ; Ex. 7.b dateTest ; Ex. 11 dateSaisie ; Ex. 11 dateObservation ; Ex. 13 evaluationDate"@fr ;
+    vs:term_status "testing" .
+
+artinq:dateModification a rdf:Property ;
+    rdfs:label "date de modification"@fr, "modified"@en ;
+    rdfs:comment "Date de dernière modification."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf dcterms:modified ;
+    skos:scopeNote "Rapprochements : Ex. 1 modifieeLe"@fr ;
+    vs:term_status "testing" .
+
+artinq:texte a rdf:Property ;
+    rdfs:label "texte"@fr, "text"@en ;
+    rdfs:comment "Contenu textuel (réponse, impression, contenu d'une réponse de LLM)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 texte ; Ex. 3.a impression ; Ex. 4 content ; Ex. 7.b contenu ; Ex. 8 content ; Ex. 10.a content ; Ex. 11 texte"@fr ;
+    vs:term_status "testing" .
+
+artinq:resume a rdf:Property ;
+    rdfs:label "résumé"@fr, "summary"@en ;
+    rdfs:comment "Résumé ou synthèse."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:abstract ;
+    skos:scopeNote "Rapprochements : Ex. 2.b summary ; Ex. 11 resume"@fr ;
+    vs:term_status "testing" .
+
+artinq:url a rdf:Property ;
+    rdfs:label "URL"@fr, "URL"@en ;
+    rdfs:comment "Adresse web d'une conversation ou d'une référence."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:anyURI ;
+    skos:scopeNote "Rapprochements : Ex. 11 urlConversation ; Ex. 13 referenceUrl"@fr ;
+    vs:term_status "testing" .
+
+artinq:numero a rdf:Property ;
+    rdfs:label "numéro"@fr, "number"@en ;
+    rdfs:comment "Numéro d'un exercice ou d'un échange."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 numero ; Ex. 5 numero ; Ex. 11 numero"@fr ;
+    vs:term_status "testing" .
+
+artinq:ordre a rdf:Property ;
+    rdfs:label "ordre"@fr, "order"@en ;
+    rdfs:comment "Position dans une séquence (rang, tour, position)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:integer ;
+    skos:scopeNote "Rapprochements : Ex. 1 ordre ; Ex. 3.a rang ; Ex. 3.b position ; Ex. 5 tour ; Ex. 6 position"@fr ;
+    vs:term_status "testing" .
+
+artinq:statut a rdf:Property ;
+    rdfs:label "statut"@fr, "status"@en ;
+    rdfs:comment "Statut (ex. simulation, succès, erreur)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 7.b statut"@fr ;
+    vs:term_status "testing" .
+
+artinq:pseudo a rdf:Property ;
+    rdfs:label "pseudo"@fr, "nickname"@en ;
+    rdfs:comment "Pseudo ou identifiant de connexion du participant."@fr ;
+    rdfs:domain artinq:Participant ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf foaf:nick ;
+    skos:scopeNote "Rapprochements : Ex. 1 pseudo ; Ex. 11 login"@fr ;
+    vs:term_status "testing" .
+
+artinq:compteGithub a rdf:Property ;
+    rdfs:label "compte GitHub"@fr, "GitHub account"@en ;
+    rdfs:comment "Identifiant GitHub du participant."@fr ;
+    rdfs:domain artinq:Participant ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf foaf:accountName ;
+    skos:scopeNote "Rapprochements : Ex. 5 compteGithub"@fr ;
+    vs:term_status "testing" .
+
+artinq:profession a rdf:Property ;
+    rdfs:label "profession"@fr, "profession"@en ;
+    rdfs:comment "Métier ou profession du participant."@fr ;
+    rdfs:domain artinq:Participant ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 3.a metier ; Ex. 11 profession"@fr ;
+    vs:term_status "testing" .
+
+artinq:dateInscription a rdf:Property ;
+    rdfs:label "date d'inscription"@fr, "registration date"@en ;
+    rdfs:comment "Date d'inscription du participant."@fr ;
+    rdfs:domain artinq:Participant ;
+    rdfs:range xsd:dateTime ;
+    skos:scopeNote "Rapprochements : Ex. 1 inscritLe"@fr ;
+    vs:term_status "testing" .
+
+artinq:utiliseLLM a rdf:Property ;
+    rdfs:label "utilise le LLM"@fr, "uses LLM"@en ;
+    rdfs:comment "Relie un participant, une conversation, un test ou une tâche au LLM utilisé."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:LLM ;
+    skos:scopeNote "Rapprochements : Ex. 3.a llmPrincipal ; Ex. 4 usesLLM ; Ex. 5 avecLLM ; Ex. 7.b utiliseModele ; Ex. 8 tests ; Ex. 10.a usesLLM ; Ex. 11 llmUtilise"@fr ;
+    vs:term_status "testing" .
+
+artinq:frequence a rdf:Property ;
+    rdfs:label "fréquence"@fr, "frequency"@en ;
+    rdfs:comment "Fréquence d'une tâche ou de l'usage d'un LLM."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.a frequence ; Ex. 2.b frequency ; Ex. 3.a frequence"@fr ;
+    vs:term_status "testing" .
+
+artinq:dureeMinuteur a rdf:Property ;
+    rdfs:label "durée du minuteur"@fr, "timer duration"@en ;
+    rdfs:comment "Durée du minuteur en secondes."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range xsd:integer ;
+    skos:scopeNote "Rapprochements : Ex. 3.a dureeMinuteur"@fr ;
+    vs:term_status "testing" .
+
+artinq:partEchangesCourts a rdf:Property ;
+    rdfs:label "part d'échanges courts"@fr, "share of short exchanges"@en ;
+    rdfs:comment "Pourcentage de conversations à une seule question-réponse."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 3.a partEchangesCourts"@fr ;
+    vs:term_status "testing" .
+
+artinq:partConversationsLongues a rdf:Property ;
+    rdfs:label "part de conversations longues"@fr, "share of long conversations"@en ;
+    rdfs:comment "Pourcentage de conversations à plusieurs allers-retours."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 3.a partConversationsLongues"@fr ;
+    vs:term_status "testing" .
+
+artinq:partDialoguesEtendus a rdf:Property ;
+    rdfs:label "part de dialogues étendus"@fr, "share of extended dialogues"@en ;
+    rdfs:comment "Pourcentage de conversations de plus d'une journée."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 3.a partDialoguesEtendus"@fr ;
+    vs:term_status "testing" .
+
+artinq:bloc a rdf:Property ;
+    rdfs:label "bloc"@fr, "block"@en ;
+    rdfs:comment "Bloc du vademecum auquel appartient l'exercice."@fr ;
+    rdfs:domain artinq:Exercice ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 bloc"@fr ;
+    vs:term_status "testing" .
+
+artinq:pageVademecum a rdf:Property ;
+    rdfs:label "page du vademecum"@fr, "vademecum page"@en ;
+    rdfs:comment "Page de l'exercice dans le vademecum."@fr ;
+    rdfs:domain artinq:Exercice ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 11 pageVademecum"@fr ;
+    vs:term_status "testing" .
+
+artinq:consigne a rdf:Property ;
+    rdfs:label "consigne"@fr, "instructions"@en ;
+    rdfs:comment "Consigne d'un exercice ou d'une tâche."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 consigne ; Ex. 7.b instruction ; Ex. 8 instructions"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourQuestion a rdf:Property ;
+    rdfs:label "a pour question"@fr, "has question"@en ;
+    rdfs:comment "Relie un exercice à l'une de ses questions."@fr ;
+    rdfs:domain artinq:Exercice ;
+    rdfs:range artinq:Question ;
+    rdfs:subPropertyOf dcterms:hasPart ;
+    skos:scopeNote "Rapprochements : Ex. 1 contientQuestion"@fr ;
+    vs:term_status "testing" .
+
+artinq:libelle a rdf:Property ;
+    rdfs:label "libellé"@fr, "wording"@en ;
+    rdfs:comment "Texte d'une question ou d'un libellé."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 libelle ; Ex. 11 libelle ; Ex. 11 question"@fr ;
+    vs:term_status "testing" .
+
+artinq:moment a rdf:Property ;
+    rdfs:label "moment"@fr, "moment"@en ;
+    rdfs:comment "Moment de la passation (avant, pendant, après…)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 moment ; Ex. 11 periode"@fr ;
+    vs:term_status "testing" .
+
+artinq:realiseePar a rdf:Property ;
+    rdfs:label "réalisée par"@fr, "carried out by"@en ;
+    rdfs:comment "Relie une passation, une conversation ou une réflexion au participant."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Participant ;
+    rdfs:subPropertyOf dcterms:creator ;
+    skos:scopeNote "Rapprochements : Ex. 1 realiseePar ; Ex. 3.a aPourParticipant ; Ex. 4 createdBy ; Ex. 5 aParticipant"@fr ;
+    vs:term_status "testing" .
+
+artinq:porteSur a rdf:Property ;
+    rdfs:label "porte sur"@fr, "is about exercise"@en ;
+    rdfs:comment "Relie une ressource à l'exercice concerné."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Exercice ;
+    skos:scopeNote "Rapprochements : Ex. 1 porteSur ; Ex. 11 hasExercice"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourReponse a rdf:Property ;
+    rdfs:label "a pour réponse"@fr, "has answer"@en ;
+    rdfs:comment "Relie une passation à l'une de ses réponses."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range artinq:Reponse ;
+    skos:scopeNote "Rapprochements : Ex. 1 contientReponse"@fr ;
+    vs:term_status "testing" .
+
+artinq:repondA a rdf:Property ;
+    rdfs:label "répond à"@fr, "answers"@en ;
+    rdfs:comment "Relie une réponse à la question."@fr ;
+    rdfs:domain artinq:Reponse ;
+    rdfs:range artinq:Question ;
+    skos:scopeNote "Rapprochements : Ex. 1 repondA"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourTrait a rdf:Property ;
+    rdfs:label "a pour trait"@fr, "has stroke"@en ;
+    rdfs:comment "Relie une réponse dessin à l'un de ses traits."@fr ;
+    rdfs:domain artinq:ReponseDessin ;
+    rdfs:range artinq:Trait ;
+    skos:scopeNote "Rapprochements : Ex. 1 composeDe"@fr ;
+    vs:term_status "testing" .
+
+artinq:outil a rdf:Property ;
+    rdfs:label "outil"@fr, "tool"@en ;
+    rdfs:comment "CRAYON, FEUTRE ou GOMME."@fr ;
+    rdfs:domain artinq:Trait ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 outil"@fr ;
+    vs:term_status "testing" .
+
+artinq:couleur a rdf:Property ;
+    rdfs:label "couleur"@fr, "colour"@en ;
+    rdfs:comment "Code hexadécimal de la couleur."@fr ;
+    rdfs:domain artinq:Trait ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 couleur"@fr ;
+    vs:term_status "testing" .
+
+artinq:epaisseur a rdf:Property ;
+    rdfs:label "épaisseur"@fr, "width"@en ;
+    rdfs:comment "Épaisseur en pixels."@fr ;
+    rdfs:domain artinq:Trait ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 1 epaisseur"@fr ;
+    vs:term_status "testing" .
+
+artinq:points a rdf:Property ;
+    rdfs:label "points"@fr, "points"@en ;
+    rdfs:comment "Points du trait en JSON : [[x, y], …]."@fr ;
+    rdfs:domain artinq:Trait ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 1 points"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourTache a rdf:Property ;
+    rdfs:label "a pour tâche"@fr, "has task"@en ;
+    rdfs:comment "Relie un participant, une passation, un exercice ou un test à une tâche."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Tache ;
+    skos:scopeNote "Rapprochements : Ex. 2.a realise ; Ex. 2.b managesTask ; Ex. 3.a aPourTache ; Ex. 6 selectsTask ; Ex. 6.c hasTache ; Ex. 7.b concerneTache ; Ex. 8 contains ; Ex. 8 provides ; Ex. 8 executes"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourCategorie a rdf:Property ;
+    rdfs:label "a pour catégorie"@fr, "has category"@en ;
+    rdfs:comment "Relie une tâche ou une conversation à sa catégorie."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:CategorieTache ;
+    skos:scopeNote "Rapprochements : Ex. 3.b categorie ; Ex. 3.b appartientCategorie ; Ex. 3.b categories ; Ex. 3.b regroupeCategorie ; Ex. 4 hasTaskCategory ; Ex. 6 category"@fr ;
+    vs:term_status "testing" .
+
+artinq:pourcentage a rdf:Property ;
+    rdfs:label "pourcentage"@fr, "percentage"@en ;
+    rdfs:comment "Part estimée (0-100) de la tâche dans l'usage du LLM."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 3.a pourcentage"@fr ;
+    vs:term_status "testing" .
+
+artinq:importance a rdf:Property ;
+    rdfs:label "importance"@fr, "importance"@en ;
+    rdfs:comment "Importance de la tâche pour le participant."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.b importance"@fr ;
+    vs:term_status "testing" .
+
+artinq:appreciation a rdf:Property ;
+    rdfs:label "appréciation"@fr, "appreciation"@en ;
+    rdfs:comment "Goût du participant pour la tâche."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.a appreciation"@fr ;
+    vs:term_status "testing" .
+
+artinq:tempsNecessaire a rdf:Property ;
+    rdfs:label "temps nécessaire"@fr, "time required"@en ;
+    rdfs:comment "Temps nécessaire pour réaliser la tâche."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.a tempsNecessaire"@fr ;
+    vs:term_status "testing" .
+
+artinq:procrastination a rdf:Property ;
+    rdfs:label "procrastination"@fr, "procrastination"@en ;
+    rdfs:comment "Tendance à repousser la tâche."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.a procrastination"@fr ;
+    vs:term_status "testing" .
+
+artinq:niveauExpertise a rdf:Property ;
+    rdfs:label "niveau d'expertise"@fr, "expertise level"@en ;
+    rdfs:comment "Expertise nécessaire ou détenue pour la tâche."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.a niveauExpertise"@fr ;
+    vs:term_status "testing" .
+
+artinq:niveauAssistance a rdf:Property ;
+    rdfs:label "niveau d'assistance"@fr, "assistance level"@en ;
+    rdfs:comment "Niveau d'assistance attendu de l'IA."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 2.b assistanceLevel"@fr ;
+    vs:term_status "testing" .
+
+artinq:delegation a rdf:Property ;
+    rdfs:label "délégation envisagée"@fr, "delegation"@en ;
+    rdfs:comment "La tâche est-elle déléguée au LLM ?"@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 6 delegation"@fr ;
+    vs:term_status "testing" .
+
+artinq:confianceComplete a rdf:Property ;
+    rdfs:label "confiance complète"@fr, "complete trust"@en ;
+    rdfs:comment "Niveau de confiance accordé au LLM pour la tâche."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 completeTrust ; Ex. 6.c confidence"@fr ;
+    vs:term_status "testing" .
+
+artinq:hesitation a rdf:Property ;
+    rdfs:label "hésitation à déléguer"@fr, "hesitation"@en ;
+    rdfs:comment "Le participant hésite-t-il à déléguer ?"@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 6 hesitation"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourRole a rdf:Property ;
+    rdfs:label "a pour rôle"@fr, "has role"@en ;
+    rdfs:comment "Relie une tâche à un rôle confié à l'IA ou conservé par l'humain."@fr ;
+    rdfs:domain artinq:Tache ;
+    rdfs:range artinq:Role ;
+    skos:scopeNote "Rapprochements : Ex. 2.b usesAIRole ; Ex. 2.b keepsHumanResponsibility"@fr ;
+    vs:term_status "testing" .
+
+artinq:attribueA a rdf:Property ;
+    rdfs:label "attribué à"@fr, "assigned to"@en ;
+    rdfs:comment "IA ou HUMAIN."@fr ;
+    rdfs:domain artinq:Role ;
+    rdfs:range xsd:string ;
+    vs:term_status "testing" .
+
+artinq:version a rdf:Property ;
+    rdfs:label "version"@fr, "version"@en ;
+    rdfs:comment "Version du LLM."@fr ;
+    rdfs:domain artinq:LLM ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 4 version ; Ex. 5 version ; Ex. 7.b version ; Ex. 11 version"@fr ;
+    vs:term_status "testing" .
+
+artinq:fournisseur a rdf:Property ;
+    rdfs:label "fournisseur"@fr, "provider"@en ;
+    rdfs:comment "Éditeur du modèle (OpenAI, Anthropic, Mistral…)."@fr ;
+    rdfs:domain artinq:LLM ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 7.b fournisseur"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourPrompt a rdf:Property ;
+    rdfs:label "a pour prompt"@fr, "has prompt"@en ;
+    rdfs:comment "Relie une tâche ou un test au prompt utilisé."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Prompt ;
+    skos:scopeNote "Rapprochements : Ex. 7.b promptUtilise ; Ex. 10.a hasPrompt"@fr ;
+    vs:term_status "testing" .
+
+artinq:modeTest a rdf:Property ;
+    rdfs:label "mode de test"@fr, "test mode"@en ;
+    rdfs:comment "individuel ou simultané."@fr ;
+    rdfs:domain artinq:Test ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 7.b mode"@fr ;
+    vs:term_status "testing" .
+
+artinq:produitReponse a rdf:Property ;
+    rdfs:label "produit la réponse"@fr, "produces output"@en ;
+    rdfs:comment "Relie un test, une tâche ou un LLM à une réponse produite."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:ReponseLLM ;
+    skos:scopeNote "Rapprochements : Ex. 7.b reponseDeTest ; Ex. 8 produces ; Ex. 8 generates ; Ex. 10.a producesResult"@fr ;
+    vs:term_status "testing" .
+
+artinq:produitePar a rdf:Property ;
+    rdfs:label "produite par"@fr, "produced by"@en ;
+    rdfs:comment "Relie une réponse au LLM qui l'a produite."@fr ;
+    rdfs:domain artinq:ReponseLLM ;
+    rdfs:range artinq:LLM ;
+    skos:scopeNote "Rapprochements : Ex. 7.b produitePar"@fr ;
+    vs:term_status "testing" .
+
+artinq:codeAnonyme a rdf:Property ;
+    rdfs:label "code d'anonymisation"@fr, "blind code"@en ;
+    rdfs:comment "Relie un LLM ou une réponse à son code d'anonymisation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:CodeAnonyme ;
+    skos:scopeNote "Rapprochements : Ex. 8 animalCode ; Ex. 8 assignsCode ; Ex. 8 receives"@fr ;
+    vs:term_status "testing" .
+
+artinq:probleme a rdf:Property ;
+    rdfs:label "problème rencontré"@fr, "problem"@en ;
+    rdfs:comment "Problème ou défi rencontré."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 10.a problem ; Ex. 13 problemChallenge"@fr ;
+    vs:term_status "testing" .
+
+artinq:cause a rdf:Property ;
+    rdfs:label "cause"@fr, "cause"@en ;
+    rdfs:comment "Cause du problème."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 10.a cause"@fr ;
+    vs:term_status "testing" .
+
+artinq:amelioration a rdf:Property ;
+    rdfs:label "piste d'amélioration"@fr, "improvement"@en ;
+    rdfs:comment "Piste d'amélioration."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 10.a improvement"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourConversation a rdf:Property ;
+    rdfs:label "a pour conversation"@fr, "has conversation"@en ;
+    rdfs:comment "Relie un historique, une passation, une fiche ou un échange à une conversation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Conversation ;
+    skos:scopeNote "Rapprochements : Ex. 3.a aPourConversationMarquante ; Ex. 3.b conversations ; Ex. 3.b memorables ; Ex. 3.b gardeConversationMemorable ; Ex. 5 dansConversation"@fr ;
+    vs:term_status "testing" .
+
+artinq:pourquoiMarquante a rdf:Property ;
+    rdfs:label "pourquoi marquante"@fr, "why memorable"@en ;
+    rdfs:comment "Raison pour laquelle la conversation a marqué."@fr ;
+    rdfs:domain artinq:ConversationMarquante ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 4 whyMemorable"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourEmotion a rdf:Property ;
+    rdfs:label "a pour émotion"@fr, "has emotion"@en ;
+    rdfs:comment "Émotion associée à une conversation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Emotion ;
+    skos:scopeNote "Rapprochements : Ex. 3.a ressenti ; Ex. 4 hasEmotion"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourTypeImpact a rdf:Property ;
+    rdfs:label "a pour type d'impact"@fr, "has impact type"@en ;
+    rdfs:comment "Type d'impact d'une conversation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:TypeImpact ;
+    skos:scopeNote "Rapprochements : Ex. 4 hasImpactType"@fr ;
+    vs:term_status "testing" .
+
+artinq:extraitUtilisateur a rdf:Property ;
+    rdfs:label "extrait utilisateur"@fr, "user excerpt"@en ;
+    rdfs:comment "Extrait d'un message du participant."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 5 extraitUser ; Ex. 11 extraitConversation"@fr ;
+    vs:term_status "testing" .
+
+artinq:extraitLLM a rdf:Property ;
+    rdfs:label "extrait LLM"@fr, "LLM excerpt"@en ;
+    rdfs:comment "Extrait de la réponse du LLM."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 5 extraitLLM"@fr ;
+    vs:term_status "testing" .
+
+artinq:utiliseDe a rdf:Property ;
+    rdfs:label "utilise le dé"@fr, "uses die"@en ;
+    rdfs:comment "Relie une passation au dé utilisé."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range artinq:De ;
+    skos:scopeNote "Rapprochements : Ex. 3.b utiliseDe"@fr ;
+    vs:term_status "testing" .
+
+artinq:faces a rdf:Property ;
+    rdfs:label "faces"@fr, "faces"@en ;
+    rdfs:comment "Nombre de faces du dé."@fr ;
+    rdfs:domain artinq:De ;
+    rdfs:range xsd:integer ;
+    skos:scopeNote "Rapprochements : Ex. 3.b faces"@fr ;
+    vs:term_status "testing" .
+
+artinq:parcourtHistorique a rdf:Property ;
+    rdfs:label "parcourt l'historique"@fr, "browses history"@en ;
+    rdfs:comment "Relie une passation à l'historique parcouru."@fr ;
+    rdfs:domain artinq:Passation ;
+    rdfs:range artinq:Historique ;
+    skos:scopeNote "Rapprochements : Ex. 3.b parcourtHistorique"@fr ;
+    vs:term_status "testing" .
+
+artinq:occurrences a rdf:Property ;
+    rdfs:label "occurrences"@fr, "occurrences"@en ;
+    rdfs:comment "Nombre d'occurrences d'une catégorie."@fr ;
+    rdfs:domain artinq:CategorieTache ;
+    rdfs:range xsd:integer ;
+    skos:scopeNote "Rapprochements : Ex. 3.b occurrences"@fr ;
+    vs:term_status "testing" .
+
+artinq:pourEchange a rdf:Property ;
+    rdfs:label "pour l'échange"@fr, "for exchange"@en ;
+    rdfs:comment "Échange concerné par la substitution."@fr ;
+    rdfs:domain artinq:Substitution ;
+    rdfs:range artinq:Echange ;
+    skos:scopeNote "Rapprochements : Ex. 5 pourInteraction"@fr ;
+    vs:term_status "testing" .
+
+artinq:roleUtilisateur a rdf:Property ;
+    rdfs:label "rôle utilisateur"@fr, "user role"@en ;
+    rdfs:comment "Terme qui remplace « moi / l'utilisateur »."@fr ;
+    rdfs:domain artinq:Substitution ;
+    rdfs:range artinq:Terme ;
+    skos:scopeNote "Rapprochements : Ex. 5 roleUser"@fr ;
+    vs:term_status "testing" .
+
+artinq:roleLLM a rdf:Property ;
+    rdfs:label "rôle LLM"@fr, "LLM role"@en ;
+    rdfs:comment "Terme qui remplace « la machine / l'IA »."@fr ;
+    rdfs:domain artinq:Substitution ;
+    rdfs:range artinq:Terme ;
+    skos:scopeNote "Rapprochements : Ex. 5 roleLLM"@fr ;
+    vs:term_status "testing" .
+
+artinq:aRaffiner a rdf:Property ;
+    rdfs:label "à raffiner"@fr, "to refine"@en ;
+    rdfs:comment "Faut-il un nouveau tour de substitution ?"@fr ;
+    rdfs:domain artinq:Substitution ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 5 aRaffiner"@fr ;
+    vs:term_status "testing" .
+
+artinq:estFinal a rdf:Property ;
+    rdfs:label "tour final"@fr, "is final"@en ;
+    rdfs:comment "Ce tour donne-t-il les termes finaux ?"@fr ;
+    rdfs:domain artinq:Substitution ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 5 estFinal"@fr ;
+    vs:term_status "testing" .
+
+artinq:evalueTerme a rdf:Property ;
+    rdfs:label "évalue le terme"@fr, "evaluates term"@en ;
+    rdfs:comment "Terme évalué."@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range artinq:Terme ;
+    skos:scopeNote "Rapprochements : Ex. 5 evalueTerme"@fr ;
+    vs:term_status "testing" .
+
+artinq:adequat a rdf:Property ;
+    rdfs:label "adéquat"@fr, "adequate"@en ;
+    rdfs:comment "Le terme décrit-il bien l'interlocuteur ?"@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 5 adequat"@fr ;
+    vs:term_status "testing" .
+
+artinq:etrange a rdf:Property ;
+    rdfs:label "étrange"@fr, "uncanny"@en ;
+    rdfs:comment "Le terme paraît-il étrange ?"@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 5 etrange"@fr ;
+    vs:term_status "testing" .
+
+artinq:correspondTon a rdf:Property ;
+    rdfs:label "correspond au ton"@fr, "matches tone"@en ;
+    rdfs:comment "Le rôle correspond-il au ton de la réponse ?"@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:boolean ;
+    skos:scopeNote "Rapprochements : Ex. 5 correspondTon"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourEvaluation a rdf:Property ;
+    rdfs:label "a pour évaluation"@fr, "has evaluation"@en ;
+    rdfs:comment "Relie une ressource à son évaluation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Evaluation ;
+    skos:scopeNote "Rapprochements : Ex. 5 aEvaluation ; Ex. 6 hasAssessment ; Ex. 6.c hasEvaluation ; Ex. 13 hasEvaluation"@fr ;
+    vs:term_status "testing" .
+
+artinq:note a rdf:Property ;
+    rdfs:label "note"@fr, "rating"@en ;
+    rdfs:comment "Note ou score (ex. 1 à 5)."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:decimal ;
+    skos:scopeNote "Rapprochements : Ex. 4 rating ; Ex. 13 scoreValue"@fr ;
+    vs:term_status "testing" .
+
+artinq:evaluationPerformance a rdf:Property ;
+    rdfs:label "évaluation de performance"@fr, "performance evaluation"@en ;
+    rdfs:comment "Appréciation de la performance du LLM."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 4 performanceEvaluation ; Ex. 5 evaluation"@fr ;
+    vs:term_status "testing" .
+
+artinq:justification a rdf:Property ;
+    rdfs:label "justification"@fr, "justification"@en ;
+    rdfs:comment "Explication d'un choix ou d'une évaluation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 4 performanceExplanation ; Ex. 5 justification ; Ex. 6 reasoning ; Ex. 13 scoreComment ; Ex. 13 generalComment"@fr ;
+    vs:term_status "testing" .
+
+artinq:adequationTache a rdf:Property ;
+    rdfs:label "adéquation de la tâche"@fr, "task fit"@en ;
+    rdfs:comment "La tâche convient-elle au test ?"@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 taskFit ; Ex. 6.c taskFit"@fr ;
+    vs:term_status "testing" .
+
+artinq:pertinenceProfessionnelle a rdf:Property ;
+    rdfs:label "pertinence professionnelle"@fr, "professional relevance"@en ;
+    rdfs:comment "Enjeu professionnel de la tâche."@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 professionalRelevance ; Ex. 6.c professionalRelevance"@fr ;
+    vs:term_status "testing" .
+
+artinq:consequencePersonnelle a rdf:Property ;
+    rdfs:label "conséquence personnelle"@fr, "personal outcome"@en ;
+    rdfs:comment "Conséquence personnelle du résultat."@fr ;
+    rdfs:domain artinq:Evaluation ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 personalOutcome ; Ex. 6.c personalOutcome"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourAttente a rdf:Property ;
+    rdfs:label "a pour attente"@fr, "has expectation"@en ;
+    rdfs:comment "Relie une tâche ou une évaluation aux attentes envers le LLM."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Attente ;
+    skos:scopeNote "Rapprochements : Ex. 6 hasLLMExpectation ; Ex. 6 hasResultCriteria ; Ex. 6.c hasAttentes"@fr ;
+    vs:term_status "testing" .
+
+artinq:performanceAttendue a rdf:Property ;
+    rdfs:label "performance attendue"@fr, "expected performance"@en ;
+    rdfs:comment "Niveau de performance attendu."@fr ;
+    rdfs:domain artinq:Attente ;
+    rdfs:range artinq:NiveauPerformance ;
+    skos:scopeNote "Rapprochements : Ex. 6 expectedPerformance ; Ex. 6.c expectedPerformance"@fr ;
+    vs:term_status "testing" .
+
+artinq:critereEchec a rdf:Property ;
+    rdfs:label "critère d'échec"@fr, "failure criterion"@en ;
+    rdfs:comment "Ce qui serait un échec."@fr ;
+    rdfs:domain artinq:Attente ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 failure ; Ex. 6.c failure"@fr ;
+    vs:term_status "testing" .
+
+artinq:critereAcceptable a rdf:Property ;
+    rdfs:label "critère de résultat acceptable"@fr, "good-enough criterion"@en ;
+    rdfs:comment "Ce qui serait suffisant."@fr ;
+    rdfs:domain artinq:Attente ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 goodEnough ; Ex. 6.c goodEnough"@fr ;
+    vs:term_status "testing" .
+
+artinq:critereReussite a rdf:Property ;
+    rdfs:label "critère de réussite"@fr, "success criterion"@en ;
+    rdfs:comment "Ce qui serait une réussite."@fr ;
+    rdfs:domain artinq:Attente ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 6 success ; Ex. 6.c success"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourCritere a rdf:Property ;
+    rdfs:label "a pour critère"@fr, "has criterion"@en ;
+    rdfs:comment "Relie un score au critère évalué."@fr ;
+    rdfs:domain artinq:ScoreCritere ;
+    rdfs:range artinq:Critere ;
+    skos:scopeNote "Rapprochements : Ex. 13 hasCriterion"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourReflexion a rdf:Property ;
+    rdfs:label "a pour réflexion"@fr, "has reflection"@en ;
+    rdfs:comment "Relie une ressource à une réflexion ou justification."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Reflexion ;
+    skos:scopeNote "Rapprochements : Ex. 2.b generatesReflection ; Ex. 11 hasReflexion ; Ex. 13 hasJustification"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourObservation a rdf:Property ;
+    rdfs:label "a pour observation"@fr, "has observation"@en ;
+    rdfs:comment "Relie une réflexion à une observation."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Observation ;
+    skos:scopeNote "Rapprochements : Ex. 11 hasObservation"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourDimension a rdf:Property ;
+    rdfs:label "a pour dimension"@fr, "has dimension"@en ;
+    rdfs:comment "Relie une réflexion à une dimension."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Dimension ;
+    skos:scopeNote "Rapprochements : Ex. 11 hasDimension"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourExemple a rdf:Property ;
+    rdfs:label "a pour exemple"@fr, "has example"@en ;
+    rdfs:comment "Relie une observation à un exemple."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Exemple ;
+    skos:scopeNote "Rapprochements : Ex. 11 hasExemple"@fr ;
+    vs:term_status "testing" .
+
+artinq:aPourDocument a rdf:Property ;
+    rdfs:label "a pour document"@fr, "has document"@en ;
+    rdfs:comment "Relie une ressource à un document ou média associé."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range artinq:Document ;
+    rdfs:subPropertyOf dcterms:references ;
+    skos:scopeNote "Rapprochements : Ex. 8 mayRequire ; Ex. 11 hasMedia ; Ex. 13 hasDocumentaryResource"@fr ;
+    vs:term_status "testing" .
+
+artinq:domaineProfessionnel a rdf:Property ;
+    rdfs:label "domaine professionnel"@fr, "professional field"@en ;
+    rdfs:comment "Domaine professionnel concerné."@fr ;
+    rdfs:domain o:Resource ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 13 professionalDomain ; Ex. 13 professionalField"@fr ;
+    vs:term_status "testing" .
+
+artinq:contributionPrincipale a rdf:Property ;
+    rdfs:label "contribution principale"@fr, "primary contribution"@en ;
+    rdfs:comment "Apport principal de l'œuvre."@fr ;
+    rdfs:domain artinq:OeuvreExemplaire ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 13 primaryContribution"@fr ;
+    vs:term_status "testing" .
+
+artinq:solutionDistinctive a rdf:Property ;
+    rdfs:label "solution distinctive"@fr, "distinctive solution"@en ;
+    rdfs:comment "Solution qui distingue l'œuvre."@fr ;
+    rdfs:domain artinq:OeuvreExemplaire ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 13 distinctiveSolution"@fr ;
+    vs:term_status "testing" .
+
+artinq:valeursProfessionnelles a rdf:Property ;
+    rdfs:label "valeurs professionnelles"@fr, "professional values"@en ;
+    rdfs:comment "Valeurs ou standards incarnés."@fr ;
+    rdfs:domain artinq:OeuvreExemplaire ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 13 professionalValues"@fr ;
+    vs:term_status "testing" .
+
+artinq:aspectAImiter a rdf:Property ;
+    rdfs:label "aspect à imiter"@fr, "aspect to emulate"@en ;
+    rdfs:comment "Ce qui mérite d'être imité."@fr ;
+    rdfs:domain artinq:OeuvreExemplaire ;
+    rdfs:range xsd:string ;
+    skos:scopeNote "Rapprochements : Ex. 13 aspectToEmulate"@fr ;
+    vs:term_status "testing" .

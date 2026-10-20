@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparaison des vocabulaires</title>
+<style>
+:root{
+  --bg:#f7f7f5; --surface:#ffffff; --ink:#1d1f23; --muted:#62666e; --line:#e2e2de;
+  --accent:#2f5bd3; --ok:#1f8a4c; --warn:#b26b00; --err:#c0392b;
+  --heat:47,91,211;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141518; --surface:#1d1f24; --ink:#e8e8e6; --muted:#9a9ea6; --line:#30333a;
+    --accent:#7c9cff; --ok:#4fc184; --warn:#e3a33b; --err:#ff7b6b; --heat:124,156,255;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141518; --surface:#1d1f24; --ink:#e8e8e6; --muted:#9a9ea6; --line:#30333a;
+  --accent:#7c9cff; --ok:#4fc184; --warn:#e3a33b; --err:#ff7b6b; --heat:124,156,255;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header,main{max-width:1200px;margin:0 auto;padding:0 16px}
+header{padding-top:32px}
+h1{font-size:1.7rem;margin:0 0 4px}
+h2{font-size:1.2rem;margin:40px 0 8px}
+p.lead{color:var(--muted);margin:0 0 16px}
+a{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:.85rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);white-space:nowrap;position:sticky;top:0;background:var(--surface)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:.78rem;font-weight:600}
+.b-ok{color:var(--ok);border:1px solid var(--ok)}
+.b-err{color:var(--err);border:1px solid var(--err)}
+.b-warn{color:var(--warn);border:1px solid var(--warn)}
+.bar{height:6px;background:var(--line);border-radius:3px;min-width:60px;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.matrix td.cell{text-align:center;width:34px;min-width:34px;font-size:.75rem}
+.matrix th.rot{height:120px;white-space:nowrap;vertical-align:bottom;padding:4px 2px}
+.matrix th.rot div{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:500}
+.dot{display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--accent)}
+.dot.c{background:var(--accent)} .dot.p{background:var(--ok)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}
+input[type=search],select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);max-width:100%}
+.seg button{font:inherit;padding:5px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.seg button:first-child{border-radius:8px 0 0 8px}.seg button:last-child{border-radius:0 8px 8px 0}
+.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.cols3 h3{font-size:.95rem;margin:0 0 6px}
+ul.terms{list-style:none;margin:0;padding:0;font-size:.88rem}
+ul.terms li{padding:2px 0;border-bottom:1px dashed var(--line)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em}
+.muted{color:var(--muted)}
+.vocab-detail .cls{border-top:1px solid var(--line);padding:10px 0}
+.vocab-detail .cls:first-child{border-top:0}
+.vocab-detail h4{margin:0 0 2px;font-size:1rem}
+.err-msg{color:var(--err);font-size:.82rem;max-width:380px}
+#log{font-size:.85rem;color:var(--muted)}
+footer{max-width:1200px;margin:48px auto 32px;padding:0 16px;color:var(--muted);font-size:.82rem}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/n3@1.17.2/browser/n3.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>Comparaison des vocabulaires Turtle</h1>
+  <p class="lead">Vocabulaires <code>artinq</code> déposés par les étudiants (colonne « lien vers le vocabulaire » du formulaire). Les fichiers sont lus en direct depuis GitHub.</p>
+  <div id="log">Chargement…</div>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <h2>Vue d'ensemble</h2>
+  <p class="muted">Couverture = part des termes (classes + propriétés) qui ont la propriété indiquée. « Domaine précis » = <code>rdfs:domain</code> différent de <code>o:Resource</code>.</p>
+  <div class="card scroll"><table id="overview"></table></div>
+
+  <h2>Termes partagés</h2>
+  <p class="muted">Termes regroupés par nom local normalisé (sans casse ni accents). Triés par nombre de vocabulaires qui les utilisent.</p>
+  <div class="controls">
+    <div class="seg" id="kindSeg">
+      <button data-k="class" class="on">Classes</button><button data-k="prop">Propriétés</button>
+    </div>
+    <input type="search" id="termFilter" placeholder="Filtrer les termes…">
+    <label><input type="checkbox" id="sharedOnly"> partagés seulement (≥ 2)</label>
+  </div>
+  <div class="card scroll matrix"><table id="matrix"></table></div>
+
+  <h2>Similarité entre vocabulaires</h2>
+  <p class="muted">Indice de Jaccard sur l'ensemble des noms de termes normalisés (0 = rien en commun, 100 = identiques).</p>
+  <div class="card scroll matrix"><table id="sim"></table></div>
+
+  <h2>Comparer deux vocabulaires</h2>
+  <div class="controls"><select id="selA"></select><span>vs</span><select id="selB"></select></div>
+  <div class="card cols3" id="pair"></div>
+
+  <h2>Vocabulaire commun recommandé</h2>
+  <p class="muted">Rapprochement sémantique des classes et propriétés de tous les vocabulaires : <a href="artinq-commun.ttl" download>artinq-commun.ttl</a>. Les sources de chaque terme sont décrites dans <code>skos:scopeNote</code>.</p>
+  <div class="stats" id="commonStats"></div>
+  <div class="card scroll"><table id="coverage"></table></div>
+  <div class="controls" style="margin-top:16px">
+    <input type="search" id="commonFilter" placeholder="Filtrer le vocabulaire commun…">
+  </div>
+  <div class="card scroll"><table id="common"></table></div>
+
+  <h2>Détail d'un vocabulaire</h2>
+  <div class="controls"><select id="selD"></select> <a id="srcLink" target="_blank" rel="noopener">voir la source</a></div>
+  <div class="card vocab-detail" id="detail"></div>
+</main>
+<footer>Source : <a id="csvLink" target="_blank" rel="noopener">formulaire (CSV)</a> · analyse avec N3.js.</footer>
+
+<script>
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMlsu0I54suBHsvYQWiEwlHfh6-b4H5IclZJ5E9XlvvKs-N0Qz9QJEw03Pot2i5LidtIcH693hPC2u/pub?gid=443052561&single=true&output=csv";
+const NS = {
+  rdf:"http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+  rdfs:"http://www.w3.org/2000/01/rdf-schema#",
+  owl:"http://www.w3.org/2002/07/owl#",
+  dcterms:"http://purl.org/dc/terms/",
+  vs:"http://www.w3.org/2003/06/sw-vocab-status/ns#",
+  o:"http://omeka.org/s/vocabs/o#",
+};
+const CLASS_TYPES = [NS.rdfs+"Class", NS.owl+"Class"];
+const PROP_TYPES = [NS.rdf+"Property", NS.owl+"ObjectProperty", NS.owl+"DatatypeProperty", NS.owl+"AnnotationProperty"];
+document.getElementById("csvLink").href = CSV_URL;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function parseCSV(text){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c=='"'){ if(text[i+1]=='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c=='"') q=true;
+    else if(c==','){ row.push(f); f=""; }
+    else if(c=='\n'||c=='\r'){ if(c=='\r'&&text[i+1]=='\n') i++; row.push(f); rows.push(row); row=[]; f=""; }
+    else f+=c;
+  }
+  if(f||row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+const localName = iri => iri.replace(/^.*[#\/]/, "");
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const short = iri => { for(const [p,n] of Object.entries(NS)) if(iri.startsWith(n)) return p+":"+iri.slice(n.length); return iri; };
+const pct = (n,d) => d ? Math.round(100*n/d) : 0;
+
+function toRaw(url){
+  return url.trim().replace("://github.com/","://raw.githubusercontent.com/").replace("/blob/","/");
+}
+function vocabName(url){
+  const m = url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+  if(!m) return {owner:url, repo:"", ex:"?"};
+  const ex = (m[2].match(/_(\d+(?:\.\w+)?)$/)||[])[1] || m[2];
+  return {owner:m[1], repo:m[2], ex};
+}
+
+async function loadVocab(url){
+  const v = {url, raw:toRaw(url), ...vocabName(url), status:"ok", error:null, terms:[], triples:0, prefixes:[], ontology:null, namespaces:new Set()};
+  let text;
+  try{
+    const r = await fetch(v.raw, {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status+(r.status==404?" — fichier introuvable ou dépôt privé":""));
+    text = await r.text();
+  }catch(e){ v.status="fetch"; v.error=e.message; return v; }
+  let quads;
+  try{
+    const parser = new N3.Parser({baseIRI:v.raw});
+    const prefixes = {};
+    quads = parser.parse(text, null, (p,iri)=>{ prefixes[p]=iri.value||iri; });
+    v.prefixes = Object.entries(prefixes);
+  }catch(e){ v.status="parse"; v.error=e.message; return v; }
+  v.triples = quads.length;
+  const store = new N3.Store(quads);
+  const objs = (s,p) => store.getObjects(s,p,null);
+  const lit = (s,p) => objs(s,p).map(o=>o.value);
+  const ont = store.getSubjects(NS.rdf+"type", NS.owl+"Ontology", null)[0];
+  if(ont) v.ontology = {iri:ont.value, title:lit(ont,NS.dcterms+"title")[0]||lit(ont,NS.rdfs+"label")[0]||""};
+  const seen = new Map();
+  const add = (kind, types) => types.forEach(t => store.getSubjects(NS.rdf+"type", t, null).forEach(s=>{
+    if(s.termType!=="NamedNode" || seen.has(s.value)) return;
+    const domain = lit(s,NS.rdfs+"domain"), range = lit(s,NS.rdfs+"range");
+    const term = {
+      iri:s.value, kind, name:localName(s.value), key:norm(localName(s.value)),
+      label:lit(s,NS.rdfs+"label")[0]||"", comment:lit(s,NS.rdfs+"comment")[0]||"",
+      domain, range, sub:lit(s,NS.rdfs+"subClassOf").concat(lit(s,NS.rdfs+"subPropertyOf")),
+      status:lit(s,NS.vs+"term_status")[0]||"",
+    };
+    seen.set(s.value, term); v.terms.push(term);
+    v.namespaces.add(s.value.slice(0, s.value.length-term.name.length));
+  }));
+  add("class", CLASS_TYPES); add("prop", PROP_TYPES);
+  return v;
+}
+
+let V = [];
+async function main(){
+  let rows;
+  try{
+    const r = await fetch(CSV_URL);
+    rows = parseCSV(await r.text());
+  }catch(e){ $("log").textContent = "Impossible de lire le CSV : "+e.message; return; }
+  const head = rows[0].map(h=>h.trim().toLowerCase());
+  const col = head.findIndex(h=>h.startsWith("lien vers le vocab"));
+  if(col<0){ $("log").textContent="Colonne « lien vers le vocabulaire » introuvable."; return; }
+  const urls = [...new Set(rows.slice(1).map(r=>(r[col]||"").trim()).filter(u=>/^https?:\/\//.test(u)))];
+  $("log").textContent = `${urls.length} liens trouvés, chargement des fichiers…`;
+  V = await Promise.all(urls.map(loadVocab));
+  V.sort((a,b)=>a.ex.localeCompare(b.ex, "fr", {numeric:true}));
+  V.forEach(v => v.id = `Ex. ${v.ex} · ${v.owner}`);
+  $("log").textContent = `Mis à jour le ${new Date().toLocaleString("fr-FR")}`;
+  render();
+}
+
+function render(){
+  const ok = V.filter(v=>v.status==="ok");
+  const all = ok.flatMap(v=>v.terms);
+  const keys = new Set(all.map(t=>t.kind+":"+t.key));
+  $("stats").innerHTML = [
+    [V.length,"vocabulaires listés"],
+    [ok.length,"lus correctement"],
+    [V.length-ok.length,"en erreur"],
+    [all.filter(t=>t.kind==="class").length,"classes (total)"],
+    [all.filter(t=>t.kind==="prop").length,"propriétés (total)"],
+    [keys.size,"termes distincts"],
+  ].map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+
+  // Overview
+  const bar = p => `${p} %<div class="bar"><i style="width:${p}%"></i></div>`;
+  let h = `<thead><tr><th>Vocabulaire</th><th>État</th><th>Triplets</th><th>Classes</th><th>Propriétés</th><th>Sous-classes</th><th>Label</th><th>Commentaire</th><th>Domaine précis</th><th>Range</th><th>term_status</th><th>Espace de noms</th></tr></thead><tbody>`;
+  for(const v of V){
+    const link = `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.id)}</a>`;
+    if(v.status!=="ok"){
+      h += `<tr><td>${link}</td><td><span class="badge b-err">${v.status==="fetch"?"inaccessible":"erreur Turtle"}</span><div class="err-msg">${esc(v.error)}</div></td><td colspan="10"></td></tr>`;
+      continue;
+    }
+    const T=v.terms, n=T.length, C=T.filter(t=>t.kind==="class"), P=T.filter(t=>t.kind==="prop");
+    const preciseDomain = P.filter(t=>t.domain.some(d=>d!==NS.o+"Resource")).length;
+    const ns=[...v.namespaces];
+    const badge = n ? `<span class="badge b-ok">OK</span>` : `<span class="badge b-warn">aucun terme</span>`;
+    h += `<tr><td>${link}${v.ontology?.title?`<div class="muted">${esc(v.ontology.title)}</div>`:""}</td><td>${badge}</td>
+      <td class="num">${v.triples}</td><td class="num">${C.length}</td><td class="num">${P.length}</td>
+      <td class="num">${C.filter(t=>t.sub.length).length}</td>
+      <td>${bar(pct(T.filter(t=>t.label).length,n))}</td><td>${bar(pct(T.filter(t=>t.comment).length,n))}</td>
+      <td>${bar(pct(preciseDomain,P.length))}</td><td>${bar(pct(P.filter(t=>t.range.length).length,P.length))}</td>
+      <td>${bar(pct(T.filter(t=>t.status).length,n))}</td>
+      <td><code>${ns.map(esc).join("<br>")}</code></td></tr>`;
+  }
+  $("overview").innerHTML = h+"</tbody>";
+
+  renderMatrix(); renderSim(); setupSelects(); renderCommon();
+}
+
+// ── Vocabulaire commun ──
+const SRC_RE = /Ex\. ([\w.]+) (\w+)/g;
+let COMMON = null;
+async function renderCommon(){
+  try{
+    const text = await (await fetch("artinq-commun.ttl",{cache:"no-store"})).text();
+    const store = new N3.Store(new N3.Parser().parse(text));
+    const one = (s,p,lang) => { const o=store.getObjects(s,p,null); return (o.find(x=>!lang||x.language===lang)||o[0])?.value||""; };
+    COMMON = [];
+    for(const [kind,types] of [["class",CLASS_TYPES],["prop",PROP_TYPES]])
+      types.forEach(t=>store.getSubjects(NS.rdf+"type",t,null).forEach(s=>{
+        const note = one(s,"http://www.w3.org/2004/02/skos/core#scopeNote");
+        COMMON.push({kind, name:localName(s.value), label:one(s,NS.rdfs+"label","fr"), comment:one(s,NS.rdfs+"comment"),
+          domain:one(s,NS.rdfs+"domain"), range:one(s,NS.rdfs+"range"),
+          sources:[...note.matchAll(SRC_RE)].map(m=>({ex:m[1], name:m[2]}))});
+      }));
+    const dropped = store.getObjects(null,"http://www.w3.org/2004/02/skos/core#editorialNote",null)
+      .flatMap(o=>[...o.value.matchAll(SRC_RE)].map(m=>m[1]+" "+m[2]));
+    const mapped = new Map();
+    COMMON.forEach(c=>c.sources.forEach(s=>mapped.set(s.ex+" "+s.name, c)));
+
+    const ok=V.filter(v=>v.status==="ok");
+    let h=`<thead><tr><th>Vocabulaire</th><th>Termes</th><th>Rapprochés</th><th>Écartés</th><th>Non couverts</th></tr></thead><tbody>`;
+    let totalMissing=0;
+    for(const v of ok){
+      const m=v.terms.filter(t=>mapped.has(v.ex+" "+t.name)).length;
+      const d=v.terms.filter(t=>dropped.includes(v.ex+" "+t.name)).length;
+      const miss=v.terms.filter(t=>!mapped.has(v.ex+" "+t.name)&&!dropped.includes(v.ex+" "+t.name));
+      totalMissing+=miss.length;
+      h+=`<tr><td>${esc(v.id)}</td><td class="num">${v.terms.length}</td><td>${pct(m,v.terms.length)} %<div class="bar"><i style="width:${pct(m,v.terms.length)}%"></i></div></td>
+        <td class="num">${d||""}</td><td>${miss.length?`<span class="badge b-warn">${miss.length}</span> <code>${miss.map(t=>esc(t.name)).join(", ")}</code>`:'<span class="badge b-ok">0</span>'}</td></tr>`;
+    }
+    $("coverage").innerHTML=h+"</tbody>";
+    const C=COMMON.filter(c=>c.kind==="class"), P=COMMON.filter(c=>c.kind==="prop");
+    const studentTerms=ok.reduce((n,v)=>n+v.terms.length,0);
+    $("commonStats").innerHTML=[[C.length,"classes communes"],[P.length,"propriétés communes"],[studentTerms,"termes étudiants"],
+      [COMMON.filter(c=>new Set(c.sources.map(s=>s.ex)).size>1).length,"termes issus de ≥ 2 exercices"],[totalMissing,"termes non couverts"]]
+      .map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+    $("commonFilter").oninput=renderCommonTable; renderCommonTable();
+  }catch(e){ $("coverage").innerHTML=`<tr><td class="err-msg">Impossible de lire artinq-commun.ttl : ${esc(e.message)}</td></tr>`; }
+}
+function renderCommonTable(){
+  const f=norm($("commonFilter").value);
+  const rows=COMMON.filter(c=>!f||norm(c.name+c.label+c.comment+c.sources.map(s=>s.name).join("")).includes(f))
+    .sort((a,b)=>a.kind.localeCompare(b.kind)||new Set(b.sources.map(s=>s.ex)).size-new Set(a.sources.map(s=>s.ex)).size||a.name.localeCompare(b.name));
+  $("common").innerHTML=`<thead><tr><th>Terme commun</th><th>Domaine → range</th><th>Exercices</th><th>Termes d'origine</th></tr></thead><tbody>`+
+    rows.map(c=>`<tr><td><span class="dot ${c.kind==="class"?"c":"p"}" style="width:9px;height:9px"></span> <code>artinq:${esc(c.name)}</code><div>${esc(c.label)}</div><div class="muted">${esc(c.comment)}</div></td>
+      <td class="muted">${c.kind==="prop"?`<code>${esc(short(c.domain).replace(/^.*#/,""))} → ${esc(short(c.range).replace(/^.*#/,""))}</code>`:""}</td>
+      <td class="num">${new Set(c.sources.map(s=>s.ex)).size}</td>
+      <td>${c.sources.map(s=>`<span class="muted">${esc(s.ex)}</span>&nbsp;<code>${esc(s.name)}</code>`).join(", ")||'<span class="muted">nouveau</span>'}</td></tr>`).join("")+"</tbody>";
+}
+
+let kind="class";
+function renderMatrix(){
+  const ok = V.filter(v=>v.status==="ok");
+  const f = norm($("termFilter").value), sharedOnly = $("sharedOnly").checked;
+  const groups = new Map();
+  ok.forEach((v,i)=>v.terms.filter(t=>t.kind===kind).forEach(t=>{
+    if(!groups.has(t.key)) groups.set(t.key,{names:new Set(),labels:new Set(),by:new Map()});
+    const g=groups.get(t.key); g.names.add(t.name); if(t.label) g.labels.add(t.label); g.by.set(i,t);
+  }));
+  let list=[...groups.entries()].filter(([k,g])=>(!f||k.includes(f)||[...g.labels].some(l=>norm(l).includes(f))) && (!sharedOnly||g.by.size>1));
+  list.sort((a,b)=>b[1].by.size-a[1].by.size || a[0].localeCompare(b[0]));
+  let h=`<thead><tr><th>Terme</th><th>n</th>${ok.map(v=>`<th class="rot"><div>${esc(v.id)}</div></th>`).join("")}</tr></thead><tbody>`;
+  for(const [k,g] of list){
+    h+=`<tr><td><code>${esc([...g.names].join(" / "))}</code><div class="muted">${esc([...g.labels].slice(0,3).join(" · "))}</div></td><td class="num">${g.by.size}</td>`;
+    ok.forEach((v,i)=>{ const t=g.by.get(i);
+      h+= t ? `<td class="cell" title="${esc(t.name+(t.label?" — "+t.label:"")+(t.comment?"\n"+t.comment:""))}"><span class="dot ${kind==="class"?"c":"p"}"></span></td>` : `<td class="cell"></td>`;
+    });
+    h+="</tr>";
+  }
+  if(!list.length) h+=`<tr><td colspan="${ok.length+2}" class="muted">Aucun terme.</td></tr>`;
+  $("matrix").innerHTML=h+"</tbody>";
+}
+document.querySelectorAll("#kindSeg button").forEach(b=>b.onclick=()=>{
+  kind=b.dataset.k; document.querySelectorAll("#kindSeg button").forEach(x=>x.classList.toggle("on",x===b)); renderMatrix();
+});
+$("termFilter").oninput=renderMatrix; $("sharedOnly").onchange=renderMatrix;
+
+const keySet = v => new Set(v.terms.map(t=>t.kind+":"+t.key));
+function jaccard(a,b){ const A=keySet(a),B=keySet(b); let i=0; A.forEach(x=>B.has(x)&&i++); const u=A.size+B.size-i; return u?i/u:0; }
+function renderSim(){
+  const ok=V.filter(v=>v.status==="ok");
+  let h=`<thead><tr><th></th>${ok.map(v=>`<th class="rot"><div>${esc(v.id)}</div></th>`).join("")}</tr></thead><tbody>`;
+  for(const a of ok){
+    h+=`<tr><th>${esc(a.id)}</th>`;
+    for(const b of ok){
+      const j=a===b?1:jaccard(a,b), p=Math.round(j*100);
+      h+=`<td class="cell" title="${esc(a.id)} / ${esc(b.id)} : ${p}" style="background:rgba(var(--heat),${(a===b?0.08:Math.min(1,j*1.6)).toFixed(2)});color:${j>0.45&&a!==b?"#fff":"inherit"}">${a===b?"—":p||""}</td>`;
+    }
+    h+="</tr>";
+  }
+  $("sim").innerHTML=h+"</tbody>";
+}
+
+function setupSelects(){
+  const ok=V.filter(v=>v.status==="ok");
+  const opts=ok.map((v,i)=>`<option value="${i}">${esc(v.id)}</option>`).join("");
+  ["selA","selB","selD"].forEach(id=>$(id).innerHTML=opts);
+  $("selB").value=Math.min(1,ok.length-1);
+  const pair=()=>{
+    const a=ok[$("selA").value], b=ok[$("selB").value]; if(!a||!b) return;
+    const mapA=new Map(a.terms.map(t=>[t.kind+":"+t.key,t])), mapB=new Map(b.terms.map(t=>[t.kind+":"+t.key,t]));
+    const li=t=>`<li><span class="dot ${t.kind==="class"?"c":"p"}" style="width:9px;height:9px"></span> <code>${esc(t.name)}</code> <span class="muted">${esc(t.label)}</span></li>`;
+    const sort=arr=>arr.sort((x,y)=>x.kind.localeCompare(y.kind)||x.name.localeCompare(y.name));
+    const common=sort([...mapA].filter(([k])=>mapB.has(k)).map(([,t])=>t));
+    const onlyA=sort([...mapA].filter(([k])=>!mapB.has(k)).map(([,t])=>t));
+    const onlyB=sort([...mapB].filter(([k])=>!mapA.has(k)).map(([,t])=>t));
+    $("pair").innerHTML=[[`Seulement dans ${a.id}`,onlyA],[`En commun (${Math.round(jaccard(a,b)*100)} % Jaccard)`,common],[`Seulement dans ${b.id}`,onlyB]]
+      .map(([t,l])=>`<div><h3>${esc(t)} <span class="muted">(${l.length})</span></h3><ul class="terms">${l.map(li).join("")||'<li class="muted">—</li>'}</ul></div>`).join("");
+  };
+  const detail=()=>{
+    const v=ok[$("selD").value]; if(!v) return;
+    $("srcLink").href=v.url;
+    const C=v.terms.filter(t=>t.kind==="class"), P=v.terms.filter(t=>t.kind==="prop");
+    const used=new Set();
+    const prop=p=>`<li><code>${esc(p.name)}</code> ${esc(p.label)}${p.range.length?` <span class="muted">→ ${p.range.map(r=>esc(short(r))).join(", ")}</span>`:""}${p.comment?`<div class="muted">${esc(p.comment)}</div>`:""}</li>`;
+    let h=C.map(c=>{
+      const ps=P.filter(p=>p.domain.includes(c.iri)); ps.forEach(p=>used.add(p));
+      return `<div class="cls"><h4><span class="dot c" style="width:10px;height:10px"></span> ${esc(c.label||c.name)} <code class="muted">${esc(c.name)}</code>${c.sub.length?` <span class="muted">⊂ ${c.sub.map(s=>esc(short(localName(s)))).join(", ")}</span>`:""}</h4>
+        ${c.comment?`<div class="muted">${esc(c.comment)}</div>`:""}
+        ${ps.length?`<ul class="terms" style="margin-top:6px">${ps.map(prop).join("")}</ul>`:""}</div>`;
+    }).join("");
+    const rest=P.filter(p=>!used.has(p));
+    if(rest.length) h+=`<div class="cls"><h4>Propriétés sans domaine de classe du vocabulaire <span class="muted">(${rest.length})</span></h4><ul class="terms">${rest.map(prop).join("")}</ul></div>`;
+    $("detail").innerHTML=h||'<p class="muted">Aucun terme.</p>';
+  };
+  $("selA").onchange=$("selB").onchange=pair; $("selD").onchange=detail;
+  pair(); detail();
+}
+
+main();
+</script>
+</body>
+</html>
