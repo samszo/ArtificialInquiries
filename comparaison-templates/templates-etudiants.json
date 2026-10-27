@@ -1,0 +1,7845 @@
+{
+ "generated": "2026-10-27T10:18:13+00:00",
+ "students": [
+  {
+   "owner": "AntoineJarnoux",
+   "repo": "ArtificialInquiries_1",
+   "ex": "1",
+   "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "artinq_Exercice",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Exercice"
+     ],
+     "title": [
+      "artinq",
+      "titre"
+     ],
+     "description": [
+      "artinq",
+      "consigne"
+     ],
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "numero",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:numero"
+      },
+      {
+       "ns": "artinq",
+       "local": "titre",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "bloc",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:bloc"
+      },
+      {
+       "ns": "artinq",
+       "local": "consigne",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:consigne"
+      },
+      {
+       "ns": "artinq",
+       "local": "contientQuestion",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourQuestion"
+      }
+     ],
+     "file": "artinq_Exercice.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_Exercice.json",
+     "common": "Exercice"
+    },
+    {
+     "label": "artinq_Participant",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Participant"
+     ],
+     "title": [
+      "artinq",
+      "pseudo"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "pseudo",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "foaf:nick"
+      },
+      {
+       "ns": "artinq",
+       "local": "inscritLe",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:dateInscription"
+      },
+      {
+       "ns": "foaf",
+       "local": "accountName",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "compte",
+       "common": "foaf:accountName"
+      }
+     ],
+     "file": "artinq_Participant.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_Participant.json",
+     "common": "Participant"
+    },
+    {
+     "label": "artinq_Passation",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Passation"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la passation",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "datePassation",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "moment",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:moment"
+      },
+      {
+       "ns": "artinq",
+       "local": "realiseePar",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:realiseePar"
+      },
+      {
+       "ns": "artinq",
+       "local": "porteSur",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:porteSur"
+      },
+      {
+       "ns": "artinq",
+       "local": "contientReponse",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourReponse"
+      }
+     ],
+     "file": "artinq_Passation.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_Passation.json",
+     "common": "Passation"
+    },
+    {
+     "label": "artinq_Question",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Question"
+     ],
+     "title": [
+      "artinq",
+      "libelle"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "ordre",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:ordre"
+      },
+      {
+       "ns": "artinq",
+       "local": "libelle",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:libelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "typeQuestion",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:type"
+      }
+     ],
+     "file": "artinq_Question.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_Question.json",
+     "common": "Question"
+    },
+    {
+     "label": "artinq_ReponseDessin",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ReponseDessin"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la réponse",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "repondA",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:repondA"
+      },
+      {
+       "ns": "artinq",
+       "local": "composeDe",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourTrait"
+      },
+      {
+       "ns": "artinq",
+       "local": "modifieeLe",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:modified"
+      }
+     ],
+     "file": "artinq_ReponseDessin.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_ReponseDessin.json",
+     "common": "ReponseDessin"
+    },
+    {
+     "label": "artinq_ReponseTexte",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ReponseTexte"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la réponse",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "repondA",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:repondA"
+      },
+      {
+       "ns": "artinq",
+       "local": "texte",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:texte"
+      },
+      {
+       "ns": "artinq",
+       "local": "modifieeLe",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:modified"
+      }
+     ],
+     "file": "artinq_ReponseTexte.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_ReponseTexte.json",
+     "common": "ReponseTexte"
+    },
+    {
+     "label": "artinq_Trait",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Trait"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre du trait",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "outil",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:outil"
+      },
+      {
+       "ns": "artinq",
+       "local": "couleur",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:couleur"
+      },
+      {
+       "ns": "artinq",
+       "local": "epaisseur",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:epaisseur"
+      },
+      {
+       "ns": "artinq",
+       "local": "points",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:points"
+      }
+     ],
+     "file": "artinq_Trait.json",
+     "url": "https://github.com/AntoineJarnoux/ArtificialInquiries_1/blob/main/resource-template/artinq_Trait.json",
+     "common": "Trait"
+    }
+   ],
+   "vocabClasses": [
+    "Participant",
+    "Exercice",
+    "Question",
+    "Passation",
+    "Reponse",
+    "ReponseDessin",
+    "ReponseTexte",
+    "Trait"
+   ]
+  },
+  {
+   "owner": "lalaoui-imene",
+   "repo": "ArtificialInquiries_2.a",
+   "ex": "2.a",
+   "url": "https://github.com/lalaoui-imene/ArtificialInquiries_2.a/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Tâche",
+     "issues": [
+      "Classe hors de l'espace de noms artinq : https://example.org/artificial-inquiries/",
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "https://example.org/artificial-inquiries/",
+      "Tache"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "nomTache",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "frequence",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:frequence"
+      },
+      {
+       "ns": "artinq",
+       "local": "appreciation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:appreciation"
+      },
+      {
+       "ns": "artinq",
+       "local": "tempsNecessaire",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:tempsNecessaire"
+      },
+      {
+       "ns": "artinq",
+       "local": "procrastination",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:procrastination"
+      },
+      {
+       "ns": "artinq",
+       "local": "niveauExpertise",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:niveauExpertise"
+      }
+     ],
+     "file": "T_che.json",
+     "url": "https://github.com/lalaoui-imene/ArtificialInquiries_2.a/blob/main/resource-template/T_che.json",
+     "common": "Tache"
+    },
+    {
+     "label": "Utilisateur",
+     "issues": [
+      "Classe hors de l'espace de noms artinq : https://example.org/artificial-inquiries/",
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "https://example.org/artificial-inquiries/",
+      "Utilisateur"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "nom",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "realise",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      }
+     ],
+     "file": "Utilisateur.json",
+     "url": "https://github.com/lalaoui-imene/ArtificialInquiries_2.a/blob/main/resource-template/Utilisateur.json",
+     "common": "Participant"
+    }
+   ],
+   "vocabClasses": [
+    "Utilisateur",
+    "Tache"
+   ]
+  },
+  {
+   "owner": "FarisGue",
+   "repo": "ArtificialInquiries_2.b",
+   "ex": "2.b",
+   "url": "https://github.com/FarisGue/ArtificialInquiries_2.b/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "AIRole",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "AIRole"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "roleName",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      }
+     ],
+     "file": "AIRole.json",
+     "url": "https://github.com/FarisGue/ArtificialInquiries_2.b/blob/main/resource-template/AIRole.json",
+     "common": "Role"
+    },
+    {
+     "label": "HumanResponsibility",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "HumanResponsibility"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "responsibilityName",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      }
+     ],
+     "file": "HumanResponsibility.json",
+     "url": "https://github.com/FarisGue/ArtificialInquiries_2.b/blob/main/resource-template/HumanResponsibility.json",
+     "common": "Role"
+    },
+    {
+     "label": "Reflection",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Reflection"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "summary",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:abstract"
+      }
+     ],
+     "file": "Reflection.json",
+     "url": "https://github.com/FarisGue/ArtificialInquiries_2.b/blob/main/resource-template/Reflection.json",
+     "common": "Reflexion"
+    },
+    {
+     "label": "Task",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Task"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskName",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "importance",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:importance"
+      },
+      {
+       "ns": "artinq",
+       "local": "frequency",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:frequence"
+      },
+      {
+       "ns": "artinq",
+       "local": "assistanceLevel",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:niveauAssistance"
+      },
+      {
+       "ns": "artinq",
+       "local": "explanation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "usesAIRole",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourRole"
+      },
+      {
+       "ns": "artinq",
+       "local": "keepsHumanResponsibility",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourRole"
+      },
+      {
+       "ns": "artinq",
+       "local": "generatesReflection",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourReflexion"
+      }
+     ],
+     "file": "Task.json",
+     "url": "https://github.com/FarisGue/ArtificialInquiries_2.b/blob/main/resource-template/Task.json",
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Task",
+    "AIRole",
+    "HumanResponsibility",
+    "Reflection",
+    "TaskManager"
+   ]
+  },
+  {
+   "owner": "leiticia44",
+   "repo": "ArtificialInquiries_3.a",
+   "ex": "3.a",
+   "url": "https://github.com/leiticia44/ArtificialInquiries_3.a/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Ex3a - Conversation marquante",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ConversationMarquante"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la conversation",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "rang",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Rang (1, 2 ou 3)",
+       "common": "artinq:ordre"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Ce qui s'est passé et pourquoi",
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "ressenti",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Ressenti",
+       "common": "artinq:aPourEmotion"
+      }
+     ],
+     "file": "Ex3a_Conversation_marquante.json",
+     "url": "https://github.com/leiticia44/ArtificialInquiries_3.a/blob/main/resource-template/Ex3a_Conversation_marquante.json",
+     "common": "ConversationMarquante"
+    },
+    {
+     "label": "Ex3a - Participant",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Participant"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Pseudo",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "metier",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Métier",
+       "common": "artinq:profession"
+      }
+     ],
+     "file": "Ex3a_Participant.json",
+     "url": "https://github.com/leiticia44/ArtificialInquiries_3.a/blob/main/resource-template/Ex3a_Participant.json",
+     "common": "Participant"
+    },
+    {
+     "label": "Ex3a - Session d'impressions",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "SessionImpressions"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la session",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "date",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Date",
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "aPourParticipant",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": "Participant",
+       "common": "artinq:realiseePar"
+      },
+      {
+       "ns": "artinq",
+       "local": "llmPrincipal",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "LLM principal",
+       "common": "artinq:utiliseLLM"
+      },
+      {
+       "ns": "artinq",
+       "local": "frequence",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Fréquence d'usage",
+       "common": "artinq:frequence"
+      },
+      {
+       "ns": "artinq",
+       "local": "dureeMinuteur",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Durée du minuteur (secondes)",
+       "common": "artinq:dureeMinuteur"
+      },
+      {
+       "ns": "artinq",
+       "local": "aPourTache",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": "Tâches déléguées",
+       "common": "artinq:aPourTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "partEchangesCourts",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Échanges courts (%)",
+       "common": "artinq:partEchangesCourts"
+      },
+      {
+       "ns": "artinq",
+       "local": "partConversationsLongues",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Conversations longues (%)",
+       "common": "artinq:partConversationsLongues"
+      },
+      {
+       "ns": "artinq",
+       "local": "partDialoguesEtendus",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Dialogues étendus (%)",
+       "common": "artinq:partDialoguesEtendus"
+      },
+      {
+       "ns": "artinq",
+       "local": "aPourConversationMarquante",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": "Conversations marquantes",
+       "common": "artinq:aPourConversation"
+      },
+      {
+       "ns": "artinq",
+       "local": "impression",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Mes impressions",
+       "common": "artinq:texte"
+      }
+     ],
+     "file": "Ex3a_Session_impressions.json",
+     "url": "https://github.com/leiticia44/ArtificialInquiries_3.a/blob/main/resource-template/Ex3a_Session_impressions.json",
+     "common": "Passation"
+    },
+    {
+     "label": "Ex3a - Tâche déléguée",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "TacheDeleguee"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Nom de la tâche",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "pourcentage",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Part estimée (%)",
+       "common": "artinq:pourcentage"
+      }
+     ],
+     "file": "Ex3a_Tache_deleguee.json",
+     "url": "https://github.com/leiticia44/ArtificialInquiries_3.a/blob/main/resource-template/Ex3a_Tache_deleguee.json",
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Participant",
+    "SessionImpressions",
+    "TacheDeleguee",
+    "ConversationMarquante"
+   ]
+  },
+  {
+   "owner": "lamiaalaassel",
+   "repo": "ArtificialInquiries_3.b",
+   "ex": "3.b",
+   "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Categorie",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Categorie"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "nom",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "occurrences",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:occurrences"
+      }
+     ],
+     "file": "Categorie.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/Categorie.json",
+     "common": "CategorieTache"
+    },
+    {
+     "label": "Conversation",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Conversation"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "titre",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "date",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "categorie",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourCategorie"
+      }
+     ],
+     "file": "Conversation.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/Conversation.json",
+     "common": "Conversation"
+    },
+    {
+     "label": "ConversationMemorable",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ConversationMemorable"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "titre",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "categorie",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourCategorie"
+      },
+      {
+       "ns": "artinq",
+       "local": "date",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      }
+     ],
+     "file": "ConversationMemorable.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/ConversationMemorable.json",
+     "common": "ConversationMarquante"
+    },
+    {
+     "label": "De",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "De"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "faces",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:faces"
+      }
+     ],
+     "file": "De.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/De.json",
+     "common": "De"
+    },
+    {
+     "label": "Fiche",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Fiche"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "categories",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourCategorie"
+      },
+      {
+       "ns": "artinq",
+       "local": "memorables",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourConversation"
+      }
+     ],
+     "file": "Fiche.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/Fiche.json",
+     "common": "Reflexion"
+    },
+    {
+     "label": "Historique",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Historique"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "conversations",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourConversation"
+      }
+     ],
+     "file": "Historique.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/Historique.json",
+     "common": "Historique"
+    },
+    {
+     "label": "Parcours",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Parcours"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "artinq",
+       "local": "position",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:ordre"
+      },
+      {
+       "ns": "artinq",
+       "local": "utiliseDe",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:utiliseDe"
+      },
+      {
+       "ns": "artinq",
+       "local": "parcourtHistorique",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:parcourtHistorique"
+      }
+     ],
+     "file": "Parcours.json",
+     "url": "https://github.com/lamiaalaassel/ArtificialInquiries_3.b/blob/main/resource-template/Parcours.json",
+     "common": "Passation"
+    }
+   ],
+   "vocabClasses": [
+    "Historique",
+    "Conversation",
+    "ConversationMemorable",
+    "De",
+    "Parcours",
+    "Categorie",
+    "Fiche"
+   ]
+  },
+  {
+   "owner": "lenaisi",
+   "repo": "ArtificialInquiries_4",
+   "ex": "4",
+   "url": "https://github.com/lenaisi/ArtificialInquiries_4/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "CategorieTache",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "CategorieTache"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": "CategorieTache",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "CategorieTache.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/CategorieTache.json",
+     "common": "CategorieTache"
+    },
+    {
+     "label": "ConversationMemorable",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ConversationMemorable"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": "ConversationMemorable",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "ConversationMemorable.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/ConversationMemorable.json",
+     "common": "ConversationMarquante"
+    },
+    {
+     "label": "LLM",
+     "issues": [
+      "Propriétés absentes du vocabulaire : hasLLM",
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "LLM"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "version",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:version"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasLLM",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      }
+     ],
+     "file": "LLM.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/LLM.json",
+     "common": "LLM"
+    },
+    {
+     "label": "Participant",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Participant"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "Participant.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/Participant.json",
+     "common": "Participant"
+    },
+    {
+     "label": "TypeImpact",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "TypeImpact"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": "TypeImpact",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "TypeImpact.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/TypeImpact.json",
+     "common": "TypeImpact"
+    },
+    {
+     "label": "emotion",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Emotion"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": "emotion",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "emotion.json",
+     "url": "https://github.com/lenaisi/ArtificialInquiries_4/blob/main/resource-template/emotion.json",
+     "common": "Emotion"
+    }
+   ],
+   "vocabClasses": [
+    "ConversationMemorable",
+    "Participant",
+    "LLM",
+    "Emotion",
+    "TypeImpact",
+    "CategorieTache"
+   ]
+  },
+  {
+   "owner": "lakabhakima45-cmd",
+   "repo": "ArtificialInquiries_5",
+   "ex": "5",
+   "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "artinq Conversation",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Conversation"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la conversation",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "date",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "aParticipant",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:realiseePar"
+      },
+      {
+       "ns": "artinq",
+       "local": "avecLLM",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:utiliseLLM"
+      }
+     ],
+     "file": "artinq_Conversation.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Conversation.json",
+     "common": "Conversation"
+    },
+    {
+     "label": "artinq EvaluationTerme",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "EvaluationTerme"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de l'évaluation",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "evalueTerme",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:evalueTerme"
+      },
+      {
+       "ns": "artinq",
+       "local": "adequat",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:adequat"
+      },
+      {
+       "ns": "artinq",
+       "local": "etrange",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:etrange"
+      },
+      {
+       "ns": "artinq",
+       "local": "correspondTon",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:correspondTon"
+      },
+      {
+       "ns": "artinq",
+       "local": "justification",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:justification"
+      }
+     ],
+     "file": "artinq_EvaluationTerme.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_EvaluationTerme.json",
+     "common": "Evaluation"
+    },
+    {
+     "label": "artinq Interaction",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Interaction"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de l'interaction",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "dansConversation",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourConversation"
+      },
+      {
+       "ns": "artinq",
+       "local": "numero",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:numero"
+      },
+      {
+       "ns": "artinq",
+       "local": "extraitUser",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:extraitUtilisateur"
+      },
+      {
+       "ns": "artinq",
+       "local": "extraitLLM",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:extraitLLM"
+      }
+     ],
+     "file": "artinq_Interaction.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Interaction.json",
+     "common": "Echange"
+    },
+    {
+     "label": "artinq LLM",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "LLM"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Nom du LLM",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "version",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:version"
+      }
+     ],
+     "file": "artinq_LLM.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_LLM.json",
+     "common": "LLM"
+    },
+    {
+     "label": "artinq Participant",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Participant"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Nom",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "compteGithub",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "foaf:accountName"
+      }
+     ],
+     "file": "artinq_Participant.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Participant.json",
+     "common": "Participant"
+    },
+    {
+     "label": "artinq Reflexion",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Reflexion"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre de la réflexion",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Texte de la réflexion",
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "aParticipant",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:realiseePar"
+      },
+      {
+       "ns": "artinq",
+       "local": "aEvaluation",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourEvaluation"
+      }
+     ],
+     "file": "artinq_Reflexion.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Reflexion.json",
+     "common": "Reflexion"
+    },
+    {
+     "label": "artinq Substitution",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Substitution"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre du tour",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "pourInteraction",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:pourEchange"
+      },
+      {
+       "ns": "artinq",
+       "local": "tour",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:ordre"
+      },
+      {
+       "ns": "artinq",
+       "local": "roleUser",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:roleUtilisateur"
+      },
+      {
+       "ns": "artinq",
+       "local": "roleLLM",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:roleLLM"
+      },
+      {
+       "ns": "artinq",
+       "local": "evaluation",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:evaluationPerformance"
+      },
+      {
+       "ns": "artinq",
+       "local": "aRaffiner",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:aRaffiner"
+      },
+      {
+       "ns": "artinq",
+       "local": "estFinal",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:estFinal"
+      }
+     ],
+     "file": "artinq_Substitution.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Substitution.json",
+     "common": "Substitution"
+    },
+    {
+     "label": "artinq Terme",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Terme"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Libellé du terme",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "typeTerme",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:type"
+      }
+     ],
+     "file": "artinq_Terme.json",
+     "url": "https://github.com/lakabhakima45-cmd/ArtificialInquiries_5/blob/main/resource-template/artinq_Terme.json",
+     "common": "Terme"
+    }
+   ],
+   "vocabClasses": [
+    "Participant",
+    "LLM",
+    "Conversation",
+    "Interaction",
+    "Substitution",
+    "Terme",
+    "EvaluationTerme",
+    "Reflexion"
+   ]
+  },
+  {
+   "owner": "zakariaradi1",
+   "repo": "ArtificialInquiries_6",
+   "ex": "6",
+   "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Ex6 - Attente LLM",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "expectedPerformance",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:performanceAttendue"
+      }
+     ],
+     "file": "attente_llm.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/attente_llm.json",
+     "class": [
+      "artinq",
+      "LLMExpectation"
+     ],
+     "common": "Attente"
+    },
+    {
+     "label": "Ex6 - Catégorie",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "categorie.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/categorie.json",
+     "class": [
+      "artinq",
+      "Category"
+     ],
+     "common": "CategorieTache"
+    },
+    {
+     "label": "Ex6 - Critères de résultat",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "failure",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereEchec"
+      },
+      {
+       "ns": "artinq",
+       "local": "goodEnough",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereAcceptable"
+      },
+      {
+       "ns": "artinq",
+       "local": "success",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereReussite"
+      }
+     ],
+     "file": "criteres_de_resultat.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/criteres_de_resultat.json",
+     "class": [
+      "artinq",
+      "ResultCriteria"
+     ],
+     "common": "Critere"
+    },
+    {
+     "label": "Ex6 - Évaluation",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskFit",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:adequationTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalRelevance",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:pertinenceProfessionnelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "personalOutcome",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:consequencePersonnelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasResultCriteria",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourAttente"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasLLMExpectation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourAttente"
+      }
+     ],
+     "file": "evaluation.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/evaluation.json",
+     "class": [
+      "artinq",
+      "TaskAssessment"
+     ],
+     "common": "Evaluation"
+    },
+    {
+     "label": "Ex6 - Niveau attendu",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "niveau_attendu.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/niveau_attendu.json",
+     "class": [
+      "artinq",
+      "ExpectationLevel"
+     ],
+     "common": "NiveauPerformance"
+    },
+    {
+     "label": "Ex6 - Tâche",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "dcterms",
+       "local": "identifier",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "category",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourCategorie"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasAssessment",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourEvaluation"
+      }
+     ],
+     "file": "tache.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/tache.json",
+     "class": [
+      "artinq",
+      "Task"
+     ],
+     "common": "Tache"
+    },
+    {
+     "label": "Ex6 - Tâche centrale",
+     "issues": [
+      "Réponse d'API (identifiants seulement) : non importable, termes déduits des identifiants",
+      "Aucun type de données précisé"
+     ],
+     "inferred": true,
+     "format": "api",
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "position",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:ordre"
+      },
+      {
+       "ns": "artinq",
+       "local": "delegation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:delegation"
+      },
+      {
+       "ns": "artinq",
+       "local": "completeTrust",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:confianceComplete"
+      },
+      {
+       "ns": "artinq",
+       "local": "hesitation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:hesitation"
+      },
+      {
+       "ns": "artinq",
+       "local": "reasoning",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:justification"
+      },
+      {
+       "ns": "artinq",
+       "local": "selectsTask",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      }
+     ],
+     "file": "tache_centrale.json",
+     "url": "https://github.com/zakariaradi1/ArtificialInquiries_6/blob/main/resource-template/tache_centrale.json",
+     "class": [
+      "artinq",
+      "CoreTask"
+     ],
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Task",
+    "CoreTask",
+    "Category",
+    "TaskAssessment",
+    "ResultCriteria",
+    "LLMExpectation",
+    "ExpectationLevel"
+   ]
+  },
+  {
+   "owner": "Nachithatim",
+   "repo": "ArtificialInquiries_6.c",
+   "ex": "6.c",
+   "url": "https://github.com/Nachithatim/ArtificialInquiries_6.c/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Attentes",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Attentes"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "expectedPerformance",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:performanceAttendue"
+      },
+      {
+       "ns": "artinq",
+       "local": "confidence",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:confianceComplete"
+      }
+     ],
+     "file": "Attentes.json",
+     "url": "https://github.com/Nachithatim/ArtificialInquiries_6.c/blob/main/resource-template/Attentes.json",
+     "common": "Attente"
+    },
+    {
+     "label": "Evaluation",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Evaluation"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "goodEnough",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereAcceptable"
+      },
+      {
+       "ns": "artinq",
+       "local": "failure",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereEchec"
+      },
+      {
+       "ns": "artinq",
+       "local": "success",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:critereReussite"
+      }
+     ],
+     "file": "Evaluation.json",
+     "url": "https://github.com/Nachithatim/ArtificialInquiries_6.c/blob/main/resource-template/Evaluation.json",
+     "common": "Evaluation"
+    },
+    {
+     "label": "Exercice6c",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Exercice6c"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasTache",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      }
+     ],
+     "file": "Exercice6c.json",
+     "url": "https://github.com/Nachithatim/ArtificialInquiries_6.c/blob/main/resource-template/Exercice6c.json",
+     "common": "Exercice"
+    },
+    {
+     "label": "Tache",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Tache"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskId",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskFit",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:adequationTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalRelevance",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:pertinenceProfessionnelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "personalOutcome",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:consequencePersonnelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasAttentes",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourAttente"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasEvaluation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourEvaluation"
+      }
+     ],
+     "file": "Tache.json",
+     "url": "https://github.com/Nachithatim/ArtificialInquiries_6.c/blob/main/resource-template/Tache.json",
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Exercice6c",
+    "Tache",
+    "Attentes",
+    "Evaluation"
+   ]
+  },
+  {
+   "owner": "MohcineBoutahiri",
+   "repo": "ArtificialInquiries_7.b",
+   "ex": "7.b",
+   "url": "https://github.com/MohcineBoutahiri/ArtificialInquiries_7.b/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "ModeleIA",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ModeleIA"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "dcterms",
+       "local": "identifier",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "fournisseur",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:fournisseur"
+      },
+      {
+       "ns": "artinq",
+       "local": "version",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:version"
+      }
+     ],
+     "file": "ModeleIA.json",
+     "url": "https://github.com/MohcineBoutahiri/ArtificialInquiries_7.b/blob/main/resource-template/ModeleIA.json",
+     "common": "LLM"
+    },
+    {
+     "label": "Reponse",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Reponse"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "identifier",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "contenu",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:texte"
+      },
+      {
+       "ns": "artinq",
+       "local": "statut",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:statut"
+      },
+      {
+       "ns": "artinq",
+       "local": "reponseDeTest",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:produitReponse"
+      },
+      {
+       "ns": "artinq",
+       "local": "produitePar",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:produitePar"
+      }
+     ],
+     "file": "Reponse.json",
+     "url": "https://github.com/MohcineBoutahiri/ArtificialInquiries_7.b/blob/main/resource-template/Reponse.json",
+     "common": "ReponseLLM"
+    },
+    {
+     "label": "Tache",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Tache"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "dcterms",
+       "local": "identifier",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "instruction",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:consigne"
+      }
+     ],
+     "file": "Tache.json",
+     "url": "https://github.com/MohcineBoutahiri/ArtificialInquiries_7.b/blob/main/resource-template/Tache.json",
+     "common": "Tache"
+    },
+    {
+     "label": "Test",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Test"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "dcterms",
+       "local": "identifier",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "promptUtilise",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourPrompt"
+      },
+      {
+       "ns": "artinq",
+       "local": "dateTest",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "concerneTache",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "mode",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:modeTest"
+      },
+      {
+       "ns": "artinq",
+       "local": "utiliseModele",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:utiliseLLM"
+      }
+     ],
+     "file": "Test.json",
+     "url": "https://github.com/MohcineBoutahiri/ArtificialInquiries_7.b/blob/main/resource-template/Test.json",
+     "common": "Test"
+    }
+   ],
+   "vocabClasses": [
+    "ModeleIA",
+    "Tache",
+    "Test",
+    "Reponse"
+   ]
+  },
+  {
+   "owner": "MarouaBenjelloun",
+   "repo": "ArtificialInquiries_8",
+   "ex": "8",
+   "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "AnimalCode",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "AnimalCode"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      }
+     ],
+     "file": "AnimalCode.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/AnimalCode.json",
+     "common": "CodeAnonyme"
+    },
+    {
+     "label": "Document",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Document"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "type",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:type"
+      }
+     ],
+     "file": "Document.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Document.json",
+     "common": "Document"
+    },
+    {
+     "label": "Exercise",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Exercise"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "contains",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "tests",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:utiliseLLM"
+      }
+     ],
+     "file": "Exercise.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Exercise.json",
+     "common": "Exercice"
+    },
+    {
+     "label": "Model",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Model"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "receives",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:codeAnonyme"
+      },
+      {
+       "ns": "artinq",
+       "local": "executes",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      },
+      {
+       "ns": "artinq",
+       "local": "produces",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:produitReponse"
+      }
+     ],
+     "file": "Model.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Model.json",
+     "common": "LLM"
+    },
+    {
+     "label": "Partner",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Partner"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "assignsCode",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:codeAnonyme"
+      },
+      {
+       "ns": "artinq",
+       "local": "provides",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourTache"
+      }
+     ],
+     "file": "Partner.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Partner.json",
+     "common": "Participant"
+    },
+    {
+     "label": "Response",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Response"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskId",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "animalCode",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:codeAnonyme"
+      },
+      {
+       "ns": "artinq",
+       "local": "content",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:texte"
+      }
+     ],
+     "file": "Response.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Response.json",
+     "common": "ReponseLLM"
+    },
+    {
+     "label": "Task",
+     "issues": [
+      "Pas de propriété de titre définie"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Task"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "id",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "instructions",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:consigne"
+      },
+      {
+       "ns": "artinq",
+       "local": "mayRequire",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourDocument"
+      },
+      {
+       "ns": "artinq",
+       "local": "generates",
+       "required": false,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:produitReponse"
+      }
+     ],
+     "file": "Task.json",
+     "url": "https://github.com/MarouaBenjelloun/ArtificialInquiries_8/blob/main/resource-template/Task.json",
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Exercise",
+    "Partner",
+    "Model",
+    "AnimalCode",
+    "Task",
+    "Document",
+    "Response"
+   ]
+  },
+  {
+   "owner": "AdrienLIMACHE",
+   "repo": "ArtificialInquiries_9",
+   "ex": "9",
+   "url": "https://github.com/AdrienLIMACHE/ArtificialInquiries_9/tree/main/resource-template",
+   "status": "absent",
+   "error": "HTTP Error 404: Not Found — répertoire resource-template introuvable ou dépôt privé",
+   "templates": []
+  },
+  {
+   "owner": "Danilblm",
+   "repo": "ArtificialInquiries_10.a",
+   "ex": "10.a",
+   "url": "https://github.com/Danilblm/ArtificialInquiries_10.a/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "LLM",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "LLM"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Nom du modèle (titre)",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "name",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:title"
+      }
+     ],
+     "file": "LLM.json",
+     "url": "https://github.com/danilblm/ArtificialInquiries_10.a/blob/main/resource-template/LLM.json",
+     "common": "LLM"
+    },
+    {
+     "label": "Prompt",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Prompt"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "content",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Contenu du prompt",
+       "common": "artinq:texte"
+      }
+     ],
+     "file": "Prompt.json",
+     "url": "https://github.com/danilblm/ArtificialInquiries_10.a/blob/main/resource-template/Prompt.json",
+     "common": "Prompt"
+    },
+    {
+     "label": "Result",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Result"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "content",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Contenu du résultat",
+       "common": "artinq:texte"
+      },
+      {
+       "ns": "artinq",
+       "local": "problem",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:probleme"
+      },
+      {
+       "ns": "artinq",
+       "local": "cause",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:cause"
+      },
+      {
+       "ns": "artinq",
+       "local": "improvement",
+       "required": false,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "artinq:amelioration"
+      }
+     ],
+     "file": "Result.json",
+     "url": "https://github.com/danilblm/ArtificialInquiries_10.a/blob/main/resource-template/Result.json",
+     "common": "ReponseLLM"
+    },
+    {
+     "label": "Task",
+     "issues": [],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Task"
+     ],
+     "title": [
+      "dcterms",
+      "title"
+     ],
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": "Titre",
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "taskId",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:identifier"
+      },
+      {
+       "ns": "artinq",
+       "local": "type",
+       "required": true,
+       "dataTypes": [
+        "literal"
+       ],
+       "altLabel": null,
+       "common": "dcterms:type"
+      },
+      {
+       "ns": "artinq",
+       "local": "usesLLM",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:utiliseLLM"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasPrompt",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:aPourPrompt"
+      },
+      {
+       "ns": "artinq",
+       "local": "producesResult",
+       "required": true,
+       "dataTypes": [
+        "resource:item"
+       ],
+       "altLabel": null,
+       "common": "artinq:produitReponse"
+      }
+     ],
+     "file": "Task.json",
+     "url": "https://github.com/danilblm/ArtificialInquiries_10.a/blob/main/resource-template/Task.json",
+     "common": "Tache"
+    }
+   ],
+   "vocabClasses": [
+    "Task",
+    "LLM",
+    "Prompt",
+    "Result"
+   ]
+  },
+  {
+   "owner": "tasnimhassan",
+   "repo": "ArtificialInquiries_11",
+   "ex": "11",
+   "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Dimension",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Dimension"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "libelle",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:libelle"
+      }
+     ],
+     "file": "artinq_Dimension.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Dimension.json",
+     "common": "Dimension"
+    },
+    {
+     "label": "Exemple",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Exemple"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "texte",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:texte"
+      },
+      {
+       "ns": "artinq",
+       "local": "dateSaisie",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "extraitConversation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:extraitUtilisateur"
+      },
+      {
+       "ns": "artinq",
+       "local": "urlConversation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:url"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasExercice",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:porteSur"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasMedia",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourDocument"
+      }
+     ],
+     "file": "artinq_Exemple.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Exemple.json",
+     "common": "Exemple"
+    },
+    {
+     "label": "Exercice",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Exercice"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "numero",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:numero"
+      },
+      {
+       "ns": "artinq",
+       "local": "titreExercice",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "artinq",
+       "local": "pageVademecum",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:pageVademecum"
+      }
+     ],
+     "file": "artinq_Exercice.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Exercice.json",
+     "common": "Exercice"
+    },
+    {
+     "label": "Média",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Media"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "fichier",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "typeMime",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      }
+     ],
+     "file": "artinq_Media.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Media.json",
+     "common": "Document"
+    },
+    {
+     "label": "Observation",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Observation"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "resume",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:abstract"
+      },
+      {
+       "ns": "artinq",
+       "local": "periode",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:moment"
+      },
+      {
+       "ns": "artinq",
+       "local": "dateObservation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasDimension",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourDimension"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasExemple",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourExemple"
+      }
+     ],
+     "file": "artinq_Observation.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Observation.json",
+     "common": "Observation"
+    },
+    {
+     "label": "Participant",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Participant"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "login",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "foaf:nick"
+      },
+      {
+       "ns": "artinq",
+       "local": "profession",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:profession"
+      },
+      {
+       "ns": "artinq",
+       "local": "llmUtilise",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:utiliseLLM"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasReflexion",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourReflexion"
+      }
+     ],
+     "file": "artinq_Participant.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Participant.json",
+     "common": "Participant"
+    },
+    {
+     "label": "Réflexion",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Reflexion"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "dateSaisie",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "typeReflexion",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:type"
+      },
+      {
+       "ns": "artinq",
+       "local": "question",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:libelle"
+      },
+      {
+       "ns": "artinq",
+       "local": "texte",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:texte"
+      },
+      {
+       "ns": "artinq",
+       "local": "version",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:version"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasObservation",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourObservation"
+      }
+     ],
+     "file": "artinq_Reflexion.json",
+     "url": "https://github.com/tasnimhassan/ArtificialInquiries_11/blob/main/resource-template/artinq_Reflexion.json",
+     "common": "Reflexion"
+    }
+   ],
+   "vocabClasses": [
+    "Participant",
+    "Reflexion",
+    "Observation",
+    "Dimension",
+    "Exemple",
+    "Exercice",
+    "Media"
+   ]
+  },
+  {
+   "owner": "gihamos",
+   "repo": "ArtificialInquiries_12",
+   "ex": "12",
+   "url": "https://github.com/gihamos/ArtificialInquiries_12/tree/main/resource-template",
+   "status": "absent",
+   "error": "HTTP Error 404: Not Found — répertoire resource-template introuvable ou dépôt privé",
+   "templates": []
+  },
+  {
+   "owner": "kasdiines",
+   "repo": "ArtificialInquiries_13",
+   "ex": "13",
+   "url": "https://github.com/kasdiines/ArtificialInquiries_13/tree/main/resource-template",
+   "status": "ok",
+   "error": null,
+   "templates": [
+    {
+     "label": "Critère Ex13",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Criterion"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      }
+     ],
+     "file": "critere-ex13.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/critere-ex13.json",
+     "common": "Critere"
+    },
+    {
+     "label": "Évaluation Ex13",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Evaluation"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "evaluationDate",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:date"
+      },
+      {
+       "ns": "artinq",
+       "local": "frequencyScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "generalComment",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:justification"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalStakesScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "expertiseRequiredScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "effortResourcesScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "collaborationScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "errorToleranceScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "standardisationScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalPrideScore",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": null
+      }
+     ],
+     "file": "evaluation-ex13.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/evaluation-ex13.json",
+     "common": "Evaluation"
+    },
+    {
+     "label": "Justification Ex13b",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "Justification"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "primaryContribution",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:contributionPrincipale"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalField",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:domaineProfessionnel"
+      },
+      {
+       "ns": "artinq",
+       "local": "problemChallenge",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:probleme"
+      },
+      {
+       "ns": "artinq",
+       "local": "distinctiveSolution",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:solutionDistinctive"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalValues",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:valeursProfessionnelles"
+      },
+      {
+       "ns": "artinq",
+       "local": "aspectToEmulate",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aspectAImiter"
+      }
+     ],
+     "file": "justification-ex13b.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/justification-ex13b.json",
+     "common": "Reflexion"
+    },
+    {
+     "label": "Note de critère",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "CriterionScore"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "scoreComment",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:justification"
+      },
+      {
+       "ns": "artinq",
+       "local": "scoreValue",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:note"
+      },
+      {
+       "ns": "artinq",
+       "local": "hasCriterion",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:aPourCritere"
+      }
+     ],
+     "file": "note-de-critere.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/note-de-critere.json",
+     "common": "ScoreCritere"
+    },
+    {
+     "label": "Ressource documentaire",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "DocumentaryResource"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "referenceUrl",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:url"
+      }
+     ],
+     "file": "ressource-documentaire.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/ressource-documentaire.json",
+     "common": "Document"
+    },
+    {
+     "label": "Travail exemplaire",
+     "issues": [
+      "Pas de propriété de titre définie",
+      "Aucun type de données précisé"
+     ],
+     "inferred": false,
+     "format": "export",
+     "class": [
+      "artinq",
+      "ExemplaryWork"
+     ],
+     "title": null,
+     "description": null,
+     "props": [
+      {
+       "ns": "dcterms",
+       "local": "title",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:title"
+      },
+      {
+       "ns": "dcterms",
+       "local": "description",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "dcterms:description"
+      },
+      {
+       "ns": "artinq",
+       "local": "professionalDomain",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:domaineProfessionnel"
+      },
+      {
+       "ns": "artinq",
+       "local": "referenceUrl",
+       "required": false,
+       "dataTypes": [],
+       "altLabel": null,
+       "common": "artinq:url"
+      }
+     ],
+     "file": "travail-exemplaire.json",
+     "url": "https://github.com/kasdiines/ArtificialInquiries_13/blob/main/resource-template/travail-exemplaire.json",
+     "common": "OeuvreExemplaire"
+    }
+   ],
+   "vocabClasses": [
+    "ExemplaryWork",
+    "Evaluation",
+    "Criterion",
+    "CriterionScore",
+    "Justification",
+    "DocumentaryResource"
+   ]
+  }
+ ],
+ "common": [
+  {
+   "class": "Participant",
+   "label": "Participant",
+   "comment": "Personne qui réalise un ou plusieurs exercices du vademecum.",
+   "file": "artinq_Participant.json",
+   "sources": [
+    "1 artinq_Participant",
+    "2.a Utilisateur",
+    "3.a Ex3a - Participant",
+    "4 Participant",
+    "5 artinq Participant",
+    "8 Partner",
+    "11 Participant"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 6,
+     "from": [
+      "2.a dcterms:title",
+      "3.a dcterms:title",
+      "4 dcterms:title",
+      "5 dcterms:title",
+      "8 dcterms:title",
+      "11 dcterms:title"
+     ],
+     "alt": "Pseudo"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 4,
+     "from": [
+      "2.a dcterms:description",
+      "4 dcterms:description",
+      "8 dcterms:description",
+      "11 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "2.a artinq:realise",
+      "8 artinq:provides"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:profession",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "3.a artinq:metier",
+      "11 artinq:profession"
+     ],
+     "alt": null
+    },
+    {
+     "q": "foaf:accountName",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "1 foaf:accountName",
+      "5 artinq:compteGithub"
+     ],
+     "alt": "compte"
+    },
+    {
+     "q": "foaf:nick",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "1 artinq:pseudo",
+      "11 artinq:login"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourReflexion",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasReflexion"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:codeAnonyme",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:assignsCode"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:dateInscription",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:inscritLe"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:llmUtilise"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 artinq:id"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Exercice",
+   "label": "Exercice",
+   "comment": "Exercice du vademecum Artificial Inquiries (numéro, bloc, consigne).",
+   "file": "artinq_Exercice.json",
+   "sources": [
+    "1 artinq_Exercice",
+    "6.c Exercice6c",
+    "8 Exercise",
+    "11 Exercice"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 4,
+     "from": [
+      "1 artinq:titre",
+      "6.c dcterms:title",
+      "8 dcterms:title",
+      "11 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "6.c dcterms:description",
+      "8 dcterms:description",
+      "11 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "6.c artinq:hasTache",
+      "8 artinq:contains"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:numero",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "1 artinq:numero",
+      "11 artinq:numero"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourQuestion",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:contientQuestion"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:bloc",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:bloc"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:consigne",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:consigne"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pageVademecum",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:pageVademecum"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:tests"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 artinq:id"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Question",
+   "label": "Question",
+   "comment": "Question ou consigne d'un exercice à laquelle le participant répond.",
+   "file": "artinq_Question.json",
+   "sources": [
+    "1 artinq_Question"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:libelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:libelle"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:ordre",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:ordre"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:type",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:typeQuestion"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Passation",
+   "label": "Passation",
+   "comment": "Séance au cours de laquelle un participant réalise un exercice, à une date et un moment donnés.",
+   "file": "artinq_Passation.json",
+   "sources": [
+    "1 artinq_Passation",
+    "3.a Ex3a - Session d'impressions",
+    "3.b Parcours"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "1 dcterms:title",
+      "3.a dcterms:title"
+     ],
+     "alt": "Titre de la passation"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:realiseePar",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "1 artinq:realiseePar",
+      "3.a artinq:aPourParticipant"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "1 artinq:datePassation",
+      "3.a dcterms:date"
+     ],
+     "alt": "Date"
+    },
+    {
+     "q": "artinq:aPourConversation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.a artinq:aPourConversationMarquante"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourReponse",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:contientReponse"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.a artinq:aPourTache"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:dureeMinuteur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:dureeMinuteur"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:frequence",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:frequence"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:moment",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:moment"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:ordre",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.b artinq:position"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:parcourtHistorique",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:parcourtHistorique"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:partConversationsLongues",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:partConversationsLongues"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:partDialoguesEtendus",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:partDialoguesEtendus"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:partEchangesCourts",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:partEchangesCourts"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:porteSur",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:porteSur"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:impression"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseDe",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:utiliseDe"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.a artinq:llmPrincipal"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Reponse",
+   "label": "Réponse",
+   "comment": "Réponse d'un participant à une question pendant une passation (classe abstraite).",
+   "file": "artinq_Reponse.json",
+   "sources": [],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:repondA",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 0,
+     "from": [],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "ReponseDessin",
+   "label": "Réponse dessin",
+   "comment": "Réponse dessinée, composée de traits ; l'image est jointe en média.",
+   "file": "artinq_ReponseDessin.json",
+   "sources": [
+    "1 artinq_ReponseDessin"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 dcterms:title"
+     ],
+     "alt": "Titre de la réponse"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTrait",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:composeDe"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:repondA",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:repondA"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:modified",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:modifieeLe"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "ReponseTexte",
+   "label": "Réponse texte",
+   "comment": "Réponse écrite à une question.",
+   "file": "artinq_ReponseTexte.json",
+   "sources": [
+    "1 artinq_ReponseTexte"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 dcterms:title"
+     ],
+     "alt": "Titre de la réponse"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:repondA",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "1 artinq:repondA"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:texte"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:modified",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:modifieeLe"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Trait",
+   "label": "Trait",
+   "comment": "Trait d'un dessin : outil, couleur, épaisseur et points.",
+   "file": "artinq_Trait.json",
+   "sources": [
+    "1 artinq_Trait"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 dcterms:title"
+     ],
+     "alt": "Titre du trait"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:couleur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:couleur"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:epaisseur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:epaisseur"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:outil",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:outil"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:points",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "1 artinq:points"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Tache",
+   "label": "Tâche",
+   "comment": "Tâche (professionnelle ou personnelle) décrite par le participant et éventuellement confiée à un LLM.",
+   "file": "artinq_Tache.json",
+   "sources": [
+    "2.a Tâche",
+    "2.b Task",
+    "3.a Ex3a - Tâche déléguée",
+    "6 Ex6 - Tâche",
+    "6 Ex6 - Tâche centrale",
+    "6.c Tache",
+    "7.b Tache",
+    "8 Task",
+    "10.a Task"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 9,
+     "from": [
+      "2.a dcterms:title",
+      "2.b dcterms:title",
+      "3.a dcterms:title",
+      "6 dcterms:title",
+      "6 dcterms:title",
+      "6.c dcterms:title",
+      "7.b dcterms:title",
+      "8 dcterms:title",
+      "10.a dcterms:title"
+     ],
+     "alt": "Nom de la tâche"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 6,
+     "from": [
+      "2.a dcterms:description",
+      "2.b dcterms:description",
+      "6 dcterms:description",
+      "6.c dcterms:description",
+      "7.b dcterms:description",
+      "8 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 5,
+     "from": [
+      "6 dcterms:identifier",
+      "6.c artinq:taskId",
+      "7.b dcterms:identifier",
+      "8 artinq:id",
+      "10.a artinq:taskId"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourEvaluation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "6 artinq:hasAssessment",
+      "6.c artinq:hasEvaluation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:consigne",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "7.b artinq:instruction",
+      "8 artinq:instructions"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:frequence",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "2.a artinq:frequence",
+      "2.b artinq:frequency"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:produitReponse",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "8 artinq:generates",
+      "10.a artinq:producesResult"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourAttente",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "6.c artinq:hasAttentes"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourCategorie",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "6 artinq:category"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourDocument",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:mayRequire"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourPrompt",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "10.a artinq:hasPrompt"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourReflexion",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "2.b artinq:generatesReflection"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourRole",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "2.b artinq:usesAIRole"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "6 artinq:selectsTask"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:adequationTache",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:taskFit"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:appreciation",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.a artinq:appreciation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:confianceComplete",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:completeTrust"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:consequencePersonnelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:personalOutcome"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:delegation",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:delegation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:hesitation",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:hesitation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:importance",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.b artinq:importance"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:justification",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:reasoning"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:niveauAssistance",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.b artinq:assistanceLevel"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:niveauExpertise",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.a artinq:niveauExpertise"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:ordre",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:position"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pertinenceProfessionnelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:professionalRelevance"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pourcentage",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:pourcentage"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:procrastination",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.a artinq:procrastination"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:tempsNecessaire",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.a artinq:tempsNecessaire"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "10.a artinq:usesLLM"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:type",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a artinq:type"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "CategorieTache",
+   "label": "Catégorie de tâche",
+   "comment": "Catégorie servant à classer des tâches ou des conversations (ex. BUSINESS, PLEASURE).",
+   "file": "artinq_CategorieTache.json",
+   "sources": [
+    "3.b Categorie",
+    "4 CategorieTache",
+    "6 Ex6 - Catégorie"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "3.b artinq:nom",
+      "4 dcterms:title",
+      "6 dcterms:title"
+     ],
+     "alt": "CategorieTache"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "4 dcterms:description",
+      "6 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:occurrences",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.b artinq:occurrences"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Role",
+   "label": "Rôle",
+   "comment": "Rôle ou responsabilité attribué soit à l'IA, soit conservé par l'humain.",
+   "file": "artinq_Role.json",
+   "sources": [
+    "2.b AIRole",
+    "2.b HumanResponsibility"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "2.b dcterms:title",
+      "2.b dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "2.b dcterms:description",
+      "2.b dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:attribueA",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "LLM",
+   "label": "Modèle de langage (LLM)",
+   "comment": "Modèle d'IA utilisé (ChatGPT, Claude, Mistral…).",
+   "file": "artinq_LLM.json",
+   "sources": [
+    "4 LLM",
+    "5 artinq LLM",
+    "7.b ModeleIA",
+    "8 Model",
+    "10.a LLM"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 5,
+     "from": [
+      "4 dcterms:title",
+      "5 dcterms:title",
+      "7.b dcterms:title",
+      "8 dcterms:title",
+      "10.a dcterms:title"
+     ],
+     "alt": "Nom du LLM"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "4 dcterms:description",
+      "7.b dcterms:description",
+      "8 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:version",
+     "required": false,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "4 artinq:version",
+      "5 artinq:version",
+      "7.b artinq:version"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "7.b dcterms:identifier",
+      "8 artinq:id"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:executes"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:codeAnonyme",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:receives"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:fournisseur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b artinq:fournisseur"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:produitReponse",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:produces"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Prompt",
+   "label": "Prompt",
+   "comment": "Instruction donnée à un LLM pour réaliser une tâche.",
+   "file": "artinq_Prompt.json",
+   "sources": [
+    "10.a Prompt"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a dcterms:title"
+     ],
+     "alt": "Titre"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a artinq:content"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Test",
+   "label": "Test",
+   "comment": "Soumission d'un même prompt à un ou plusieurs LLM.",
+   "file": "artinq_Test.json",
+   "sources": [
+    "7.b Test"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourPrompt",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "7.b artinq:promptUtilise"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourTache",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "7.b artinq:concerneTache"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:modeTest",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b artinq:mode"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "7.b artinq:utiliseModele"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b artinq:dateTest"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b dcterms:identifier"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "ReponseLLM",
+   "label": "Réponse d'un LLM",
+   "comment": "Résultat produit par un LLM lors d'un test ou d'une tâche.",
+   "file": "artinq_ReponseLLM.json",
+   "sources": [
+    "7.b Reponse",
+    "8 Response",
+    "10.a Result"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "7.b dcterms:title",
+      "8 dcterms:title",
+      "10.a dcterms:title"
+     ],
+     "alt": "Titre"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "7.b artinq:contenu",
+      "8 artinq:content",
+      "10.a artinq:content"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "7.b dcterms:identifier",
+      "8 artinq:id"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:amelioration",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a artinq:improvement"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:cause",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a artinq:cause"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:codeAnonyme",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "8 artinq:animalCode"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:probleme",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "10.a artinq:problem"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:produitReponse",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "7.b artinq:reponseDeTest"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:produitePar",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "7.b artinq:produitePar"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:statut",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "7.b artinq:statut"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "CodeAnonyme",
+   "label": "Code d'anonymisation",
+   "comment": "Code (ex. nom d'animal) qui masque l'identité d'un LLM pendant un test à l'aveugle.",
+   "file": "artinq_CodeAnonyme.json",
+   "sources": [
+    "8 AnimalCode"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 dcterms:description"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Historique",
+   "label": "Historique de conversations",
+   "comment": "Ensemble des conversations d'un participant avec des LLM.",
+   "file": "artinq_Historique.json",
+   "sources": [
+    "3.b Historique"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourConversation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:conversations"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Conversation",
+   "label": "Conversation",
+   "comment": "Conversation entre un participant et un LLM.",
+   "file": "artinq_Conversation.json",
+   "sources": [
+    "3.b Conversation",
+    "5 artinq Conversation"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "3.b artinq:titre",
+      "5 dcterms:title"
+     ],
+     "alt": "Titre de la conversation"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "3.b artinq:date",
+      "5 dcterms:date"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourCategorie",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:categorie"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:realiseePar",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:aParticipant"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:utiliseLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:avecLLM"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "ConversationMarquante",
+   "label": "Conversation marquante",
+   "comment": "Conversation qui a laissé une impression durable.",
+   "file": "artinq_ConversationMarquante.json",
+   "sources": [
+    "3.a Ex3a - Conversation marquante",
+    "3.b ConversationMemorable",
+    "4 ConversationMemorable"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "3.a dcterms:title",
+      "3.b artinq:titre",
+      "4 dcterms:title"
+     ],
+     "alt": "Titre de la conversation"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "3.a dcterms:description",
+      "4 dcterms:description"
+     ],
+     "alt": "Ce qui s'est passé et pourquoi"
+    },
+    {
+     "q": "artinq:aPourCategorie",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:categorie"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourEmotion",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.a artinq:ressenti"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:ordre",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.a artinq:rang"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.b artinq:date"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pourquoiMarquante",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Echange",
+   "label": "Échange",
+   "comment": "Un message du participant et la réponse du LLM au sein d'une conversation.",
+   "file": "artinq_Echange.json",
+   "sources": [
+    "5 artinq Interaction"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 dcterms:title"
+     ],
+     "alt": "Titre de l'interaction"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourConversation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:dansConversation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:extraitLLM",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:extraitLLM"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:extraitUtilisateur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:extraitUser"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:numero",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:numero"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Emotion",
+   "label": "Émotion",
+   "comment": "Émotion associée à une conversation (enthousiasme, frustration, surprise…).",
+   "file": "artinq_Emotion.json",
+   "sources": [
+    "4 emotion"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "4 dcterms:title"
+     ],
+     "alt": "emotion"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "4 dcterms:description"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "TypeImpact",
+   "label": "Type d'impact",
+   "comment": "Nature de l'impact d'une conversation sur le participant.",
+   "file": "artinq_TypeImpact.json",
+   "sources": [
+    "4 TypeImpact"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "4 dcterms:title"
+     ],
+     "alt": "TypeImpact"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "4 dcterms:description"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Terme",
+   "label": "Terme",
+   "comment": "Mot de remplacement pour désigner un interlocuteur (humain ou LLM).",
+   "file": "artinq_Terme.json",
+   "sources": [
+    "5 artinq Terme"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 dcterms:title"
+     ],
+     "alt": "Libellé du terme"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:type",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:typeTerme"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Substitution",
+   "label": "Substitution",
+   "comment": "Tour de substitution attribuant de nouveaux rôles au participant et au LLM.",
+   "file": "artinq_Substitution.json",
+   "sources": [
+    "5 artinq Substitution"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 dcterms:title"
+     ],
+     "alt": "Titre du tour"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:aRaffiner",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:aRaffiner"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:estFinal",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:estFinal"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:evaluationPerformance",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:evaluation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:ordre",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:tour"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pourEchange",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:pourInteraction"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:roleLLM",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:roleLLM"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:roleUtilisateur",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:roleUser"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Evaluation",
+   "label": "Évaluation",
+   "comment": "Jugement porté sur une tâche, un terme, une réponse ou une œuvre.",
+   "file": "artinq_Evaluation.json",
+   "sources": [
+    "5 artinq EvaluationTerme",
+    "6 Ex6 - Évaluation",
+    "6.c Evaluation",
+    "13 Évaluation Ex13"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 4,
+     "from": [
+      "5 dcterms:title",
+      "6 dcterms:title",
+      "6.c dcterms:title",
+      "13 dcterms:title"
+     ],
+     "alt": "Titre de l'évaluation"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "6.c dcterms:description",
+      "13 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:justification",
+     "required": false,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "5 artinq:justification",
+      "13 artinq:generalComment"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourAttente",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "6 artinq:hasResultCriteria"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:adequat",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:adequat"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:adequationTache",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:taskFit"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:consequencePersonnelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:personalOutcome"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:correspondTon",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:correspondTon"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereAcceptable",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:goodEnough"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereEchec",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:failure"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereReussite",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:success"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:etrange",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "5 artinq:etrange"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:evalueTerme",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:evalueTerme"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:pertinenceProfessionnelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:professionalRelevance"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:evaluationDate"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Attente",
+   "label": "Attente envers le LLM",
+   "comment": "Niveau de performance attendu et critères d'échec, de résultat acceptable et de réussite.",
+   "file": "artinq_Attente.json",
+   "sources": [
+    "6 Ex6 - Attente LLM",
+    "6.c Attentes"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "6 dcterms:title",
+      "6.c dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:performanceAttendue",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 2,
+     "from": [
+      "6 artinq:expectedPerformance",
+      "6.c artinq:expectedPerformance"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:confianceComplete",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6.c artinq:confidence"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereAcceptable",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereEchec",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereReussite",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "NiveauPerformance",
+   "label": "Niveau de performance",
+   "comment": "Échelle : TERRIBLE, PRETTY_BAD, GOOD_ENOUGH, EXCELLENT.",
+   "file": "artinq_NiveauPerformance.json",
+   "sources": [
+    "6 Ex6 - Niveau attendu"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 dcterms:description"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Critere",
+   "label": "Critère",
+   "comment": "Critère d'évaluation (fréquence, enjeux, expertise, effort, collaboration, tolérance à l'erreur, standardisation, fierté).",
+   "file": "artinq_Critere.json",
+   "sources": [
+    "6 Ex6 - Critères de résultat",
+    "13 Critère Ex13"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 2,
+     "from": [
+      "6 dcterms:title",
+      "13 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereAcceptable",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:goodEnough"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereEchec",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:failure"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:critereReussite",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "6 artinq:success"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "ScoreCritere",
+   "label": "Score de critère",
+   "comment": "Note de 1 à 5 attribuée à un critère dans une évaluation.",
+   "file": "artinq_ScoreCritere.json",
+   "sources": [
+    "13 Note de critère"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourCritere",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "13 artinq:hasCriterion"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:justification",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:scoreComment"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:note",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:scoreValue"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Reflexion",
+   "label": "Réflexion",
+   "comment": "Texte de réflexion, de synthèse ou de justification rédigé par le participant.",
+   "file": "artinq_Reflexion.json",
+   "sources": [
+    "2.b Reflection",
+    "3.b Fiche",
+    "5 artinq Reflexion",
+    "11 Réflexion",
+    "13 Justification Ex13b"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 4,
+     "from": [
+      "2.b dcterms:title",
+      "5 dcterms:title",
+      "11 dcterms:title",
+      "13 dcterms:title"
+     ],
+     "alt": "Titre de la réflexion"
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 4,
+     "from": [
+      "2.b dcterms:description",
+      "5 dcterms:description",
+      "11 dcterms:description",
+      "13 dcterms:description"
+     ],
+     "alt": "Texte de la réflexion"
+    },
+    {
+     "q": "artinq:aPourCategorie",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:categories"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourConversation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "3.b artinq:memorables"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourEvaluation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:aEvaluation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourObservation",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasObservation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aspectAImiter",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:aspectToEmulate"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:contributionPrincipale",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:primaryContribution"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:domaineProfessionnel",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:professionalField"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:libelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:question"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:probleme",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:problemChallenge"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:realiseePar",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "5 artinq:aParticipant"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:solutionDistinctive",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:distinctiveSolution"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:texte"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:valeursProfessionnelles",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:professionalValues"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:version",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:version"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:abstract",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "2.b artinq:summary"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:dateSaisie"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:type",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:typeReflexion"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Observation",
+   "label": "Observation",
+   "comment": "Observation datée sur l'usage des LLM (avant, pendant ou après).",
+   "file": "artinq_Observation.json",
+   "sources": [
+    "11 Observation"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourDimension",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasDimension"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourExemple",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasExemple"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:moment",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:periode"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:abstract",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:resume"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:dateObservation"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Dimension",
+   "label": "Dimension",
+   "comment": "Dimension d'analyse d'une réflexion.",
+   "file": "artinq_Dimension.json",
+   "sources": [
+    "11 Dimension"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:libelle",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:libelle"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Exemple",
+   "label": "Exemple",
+   "comment": "Exemple concret (extrait de conversation, lien) illustrant une observation.",
+   "file": "artinq_Exemple.json",
+   "sources": [
+    "11 Exemple"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aPourDocument",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasMedia"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:extraitUtilisateur",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:extraitConversation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:porteSur",
+     "required": false,
+     "dataType": "resource:item",
+     "n": 1,
+     "from": [
+      "11 artinq:hasExercice"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:texte",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:texte"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:url",
+     "required": false,
+     "dataType": "uri",
+     "n": 1,
+     "from": [
+      "11 artinq:urlConversation"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:date",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "11 artinq:dateSaisie"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "Document",
+   "label": "Document",
+   "comment": "Ressource documentaire ou média associé (fichier, source, capture).",
+   "file": "artinq_Document.json",
+   "sources": [
+    "8 Document",
+    "11 Média",
+    "13 Ressource documentaire"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "8 dcterms:title",
+      "11 dcterms:title",
+      "13 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 3,
+     "from": [
+      "8 dcterms:description",
+      "11 dcterms:description",
+      "13 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:url",
+     "required": false,
+     "dataType": "uri",
+     "n": 1,
+     "from": [
+      "13 artinq:referenceUrl"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:identifier",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 artinq:id"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:type",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "8 artinq:type"
+     ],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "OeuvreExemplaire",
+   "label": "Œuvre exemplaire",
+   "comment": "Travail ou document professionnel choisi pour son exemplarité.",
+   "file": "artinq_OeuvreExemplaire.json",
+   "sources": [
+    "13 Travail exemplaire"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 dcterms:title"
+     ],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 dcterms:description"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:domaineProfessionnel",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "13 artinq:professionalDomain"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:url",
+     "required": false,
+     "dataType": "uri",
+     "n": 1,
+     "from": [
+      "13 artinq:referenceUrl"
+     ],
+     "alt": null
+    },
+    {
+     "q": "artinq:aspectAImiter",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:contributionPrincipale",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:solutionDistinctive",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:valeursProfessionnelles",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    }
+   ]
+  },
+  {
+   "class": "De",
+   "label": "Dé",
+   "comment": "Dé utilisé pour parcourir l'historique de manière aléatoire.",
+   "file": "artinq_De.json",
+   "sources": [
+    "3.b De"
+   ],
+   "props": [
+    {
+     "q": "dcterms:title",
+     "required": true,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "dcterms:description",
+     "required": false,
+     "dataType": "literal",
+     "n": 0,
+     "from": [],
+     "alt": null
+    },
+    {
+     "q": "artinq:faces",
+     "required": false,
+     "dataType": "literal",
+     "n": 1,
+     "from": [
+      "3.b artinq:faces"
+     ],
+     "alt": null
+    }
+   ]
+  }
+ ]
+}

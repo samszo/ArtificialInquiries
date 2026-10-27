@@ -4,74 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Comparaison des vocabulaires</title>
-<style>
-:root{
-  --bg:#f7f7f5; --surface:#ffffff; --ink:#1d1f23; --muted:#62666e; --line:#e2e2de;
-  --accent:#2f5bd3; --ok:#1f8a4c; --warn:#b26b00; --err:#c0392b;
-  --heat:47,91,211;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#141518; --surface:#1d1f24; --ink:#e8e8e6; --muted:#9a9ea6; --line:#30333a;
-    --accent:#7c9cff; --ok:#4fc184; --warn:#e3a33b; --err:#ff7b6b; --heat:124,156,255;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#141518; --surface:#1d1f24; --ink:#e8e8e6; --muted:#9a9ea6; --line:#30333a;
-  --accent:#7c9cff; --ok:#4fc184; --warn:#e3a33b; --err:#ff7b6b; --heat:124,156,255;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-header,main{max-width:1200px;margin:0 auto;padding:0 16px}
-header{padding-top:32px}
-h1{font-size:1.7rem;margin:0 0 4px}
-h2{font-size:1.2rem;margin:40px 0 8px}
-p.lead{color:var(--muted);margin:0 0 16px}
-a{color:var(--accent)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.stat b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
-.stat span{color:var(--muted);font-size:.85rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
-.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;font-size:.88rem}
-th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{font-weight:600;color:var(--muted);white-space:nowrap;position:sticky;top:0;background:var(--surface)}
-td.num{text-align:right;font-variant-numeric:tabular-nums}
-.badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:.78rem;font-weight:600}
-.b-ok{color:var(--ok);border:1px solid var(--ok)}
-.b-err{color:var(--err);border:1px solid var(--err)}
-.b-warn{color:var(--warn);border:1px solid var(--warn)}
-.bar{height:6px;background:var(--line);border-radius:3px;min-width:60px;margin-top:4px}
-.bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
-.matrix td.cell{text-align:center;width:34px;min-width:34px;font-size:.75rem}
-.matrix th.rot{height:120px;white-space:nowrap;vertical-align:bottom;padding:4px 2px}
-.matrix th.rot div{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:500}
-.dot{display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--accent)}
-.dot.c{background:var(--accent)} .dot.p{background:var(--ok)}
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 12px}
-input[type=search],select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);max-width:100%}
-.seg button{font:inherit;padding:5px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.seg button:first-child{border-radius:8px 0 0 8px}.seg button:last-child{border-radius:0 8px 8px 0}
-.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.cols3 h3{font-size:.95rem;margin:0 0 6px}
-ul.terms{list-style:none;margin:0;padding:0;font-size:.88rem}
-ul.terms li{padding:2px 0;border-bottom:1px dashed var(--line)}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em}
-.muted{color:var(--muted)}
-.vocab-detail .cls{border-top:1px solid var(--line);padding:10px 0}
-.vocab-detail .cls:first-child{border-top:0}
-.vocab-detail h4{margin:0 0 2px;font-size:1rem}
-.err-msg{color:var(--err);font-size:.82rem;max-width:380px}
-#log{font-size:.85rem;color:var(--muted)}
-footer{max-width:1200px;margin:48px auto 32px;padding:0 16px;color:var(--muted);font-size:.82rem}
-</style>
+<link rel="stylesheet" href="../assets/style.css">
 <script src="https://cdn.jsdelivr.net/npm/n3@1.17.2/browser/n3.min.js"></script>
 </head>
 <body>
 <header>
   <h1>Comparaison des vocabulaires Turtle</h1>
+  <nav class="nav"><b>Vocabulaires</b> · <a href="../comparaison-templates/">Modèles de ressources</a></nav>
   <p class="lead">Vocabulaires <code>artinq</code> déposés par les étudiants (colonne « lien vers le vocabulaire » du formulaire). Les fichiers sont lus en direct depuis GitHub.</p>
   <div id="log">Chargement…</div>
   <div class="stats" id="stats"></div>

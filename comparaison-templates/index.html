@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparaison des modèles</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+  <h1>Comparaison des modèles de ressources</h1>
+  <nav class="nav"><a href="../comparaison-vocabulaires/">Vocabulaires</a> · <b>Modèles de ressources</b></nav>
+  <p class="lead">Modèles de ressources Omeka S (répertoire <code>resource-template</code> des dépôts GitHub), rapprochés du <a href="../comparaison-vocabulaires/artinq-commun.ttl">vocabulaire commun</a>.</p>
+  <div id="log">Chargement…</div>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <h2>Vue d'ensemble</h2>
+  <p class="muted">« Classes couvertes » = classes du vocabulaire de l'étudiant qui ont un modèle. Les modèles au format API ne contiennent que des identifiants : leurs termes ont été déduits de l'ordre d'import du vocabulaire.</p>
+  <div class="card scroll"><table id="overview"></table></div>
+
+  <h2>Couverture par classe commune</h2>
+  <p class="muted">Chaque ligne est une classe du vocabulaire commun ; chaque case indique le ou les modèles d'un exercice qui s'y rattachent.</p>
+  <div class="card scroll matrix"><table id="matrix"></table></div>
+
+  <h2>Comparer les modèles d'une classe</h2>
+  <p class="muted">Propriétés de chaque modèle, une fois ramenées au vocabulaire commun. <b>●</b> utilisée, <b>★</b> obligatoire ; T = texte, R = ressource, U = URI, ∅ = type non précisé. La dernière colonne est le modèle recommandé.</p>
+  <div class="controls"><select id="selClass"></select> <a id="dlClass" download>télécharger le modèle recommandé</a></div>
+  <div class="card scroll matrix"><table id="compare"></table></div>
+
+  <h2>Problèmes détectés</h2>
+  <div class="card scroll"><table id="issues"></table></div>
+
+  <h2>Modèles communs recommandés</h2>
+  <p class="muted">Un modèle par classe du vocabulaire commun, à importer dans Omeka S (<i>Modèles de ressources → Importer</i>) après le vocabulaire <code>artinq-commun.ttl</code>. Titre : <code>dcterms:title</code> ; description : <code>dcterms:description</code>. Une propriété est obligatoire si au moins deux modèles étudiants, et la majorité de ceux qui l'utilisent, l'exigent.</p>
+  <div class="card scroll"><table id="common"></table></div>
+</main>
+<footer>Instantané généré le <span id="gen"></span> par <code>generer_templates_communs.py</code> — relancer le script pour mettre à jour.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pct = (n,d) => d ? Math.round(100*n/d) : 0;
+const bar = p => `${p} %<div class="bar"><i style="width:${p}%"></i></div>`;
+const DT = {"literal":"T","resource:item":"R","uri":"U"};
+const chip = (ns,local,extra="") => `<span class="chip ${esc(ns)} ${extra}">${esc(ns)}:${esc(local)}</span>`;
+let D;
+
+fetch("templates-etudiants.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{D=d; render();})
+  .catch(e=>$("log").textContent="Impossible de lire templates-etudiants.json : "+e.message);
+
+function render(){
+  const S=D.students, ok=S.filter(s=>s.status==="ok"), T=ok.flatMap(s=>s.templates.map(t=>({...t,s})));
+  $("log").textContent=""; $("gen").textContent=new Date(D.generated).toLocaleString("fr-FR");
+  $("stats").innerHTML=[[S.length,"dépôts"],[ok.length,"avec modèles"],[T.length,"modèles étudiants"],
+    [T.reduce((n,t)=>n+t.props.length,0),"propriétés utilisées"],[T.filter(t=>t.issues.length).length,"modèles avec remarques"],[D.common.length,"modèles communs"]]
+    .map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+
+  // Vue d'ensemble
+  let h=`<thead><tr><th>Exercice</th><th>Modèles</th><th>Format</th><th>Propriétés</th><th>Titre défini</th><th>Types de données</th><th>Obligatoires</th><th>Libellés adaptés</th><th>Classes couvertes</th><th>Remarques</th></tr></thead><tbody>`;
+  for(const s of S){
+    const id=`<a href="${esc(s.url)}" target="_blank" rel="noopener">Ex. ${esc(s.ex)} · ${esc(s.owner)}</a>`;
+    if(s.status!=="ok"){ h+=`<tr><td>${id}</td><td colspan="9"><span class="badge b-err">absent</span> <span class="err-msg">${esc(s.error)}</span></td></tr>`; continue; }
+    const P=s.templates.flatMap(t=>t.props), n=P.length;
+    const fmts=[...new Set(s.templates.map(t=>t.format))];
+    const covered=new Set(s.templates.map(t=>t.class?.[1]));
+    const vc=s.vocabClasses||[];
+    const missing=vc.filter(c=>!covered.has(c));
+    h+=`<tr><td>${id}</td><td class="num">${s.templates.length}</td>
+      <td>${fmts.map(f=>`<span class="badge ${f==="export"?"b-ok":"b-warn"}">${f==="export"?"export":f==="api"?"API":f}</span>`).join(" ")}</td>
+      <td class="num">${n}</td>
+      <td>${bar(pct(s.templates.filter(t=>t.title).length,s.templates.length))}</td>
+      <td>${bar(pct(P.filter(p=>p.dataTypes.length).length,n))}</td>
+      <td>${bar(pct(P.filter(p=>p.required).length,n))}</td>
+      <td>${bar(pct(P.filter(p=>p.altLabel).length,n))}</td>
+      <td>${vc.length?`${vc.length-missing.length}/${vc.length}`:"?"}${missing.length?`<div class="muted" style="font-size:.8rem">sans modèle : ${missing.map(esc).join(", ")}</div>`:""}</td>
+      <td class="num">${s.templates.reduce((k,t)=>k+t.issues.length,0)||""}</td></tr>`;
+  }
+  $("overview").innerHTML=h+"</tbody>";
+
+  // Matrice classes communes × exercices
+  h=`<thead><tr><th>Classe commune</th><th>n</th>${ok.map(s=>`<th class="rot"><div>Ex. ${esc(s.ex)} · ${esc(s.owner)}</div></th>`).join("")}</tr></thead><tbody>`;
+  const rows=D.common.map(c=>({c,cells:ok.map(s=>s.templates.filter(t=>t.common===c.class))}))
+    .sort((a,b)=>b.cells.filter(x=>x.length).length-a.cells.filter(x=>x.length).length||a.c.class.localeCompare(b.c.class));
+  for(const {c,cells} of rows){
+    h+=`<tr><td><code>artinq:${esc(c.class)}</code><div class="muted">${esc(c.label)}</div></td><td class="num">${cells.filter(x=>x.length).length}</td>`;
+    h+=cells.map(ts=>ts.length?`<td class="cell" title="${esc(ts.map(t=>t.label+" ("+(t.class||[]).join(":")+")").join("\n"))}"><span class="dot c"></span>${ts.length>1?`<sup>${ts.length}</sup>`:""}</td>`:`<td class="cell"></td>`).join("")+"</tr>";
+  }
+  const orphan=T.filter(t=>!t.common);
+  if(orphan.length) h+=`<tr><td colspan="${ok.length+2}" class="err-msg">Sans classe commune : ${orphan.map(t=>`Ex. ${esc(t.s.ex)} ${esc(t.label)}`).join(", ")}</td></tr>`;
+  $("matrix").innerHTML=h+"</tbody>";
+
+  // Sélecteur de comparaison
+  $("selClass").innerHTML=rows.map(({c,cells})=>`<option value="${esc(c.class)}">${esc(c.label)} (${cells.flat().length} modèle${cells.flat().length>1?"s":""})</option>`).join("");
+  $("selClass").onchange=renderCompare; renderCompare();
+
+  // Problèmes
+  const withIssues=T.filter(t=>t.issues.length);
+  $("issues").innerHTML=`<thead><tr><th>Exercice</th><th>Modèle</th><th>Classe</th><th>Remarques</th></tr></thead><tbody>`+
+    withIssues.map(t=>`<tr><td>Ex. ${esc(t.s.ex)}</td><td>${t.url?`<a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)}</a>`:esc(t.label)}</td>
+      <td>${t.class?chip(t.class[0].startsWith("http")?"?":t.class[0],t.class[1]):"—"}</td>
+      <td><ul class="issues">${t.issues.map(i=>`<li>${esc(i)}</li>`).join("")}</ul></td></tr>`).join("")+"</tbody>";
+
+  // Modèles communs
+  $("common").innerHTML=`<thead><tr><th>Modèle</th><th>Propriétés</th><th>Modèles d'origine</th><th></th></tr></thead><tbody>`+
+    D.common.map(c=>`<tr><td><code>artinq:${esc(c.class)}</code><div>${esc(c.label)}</div><div class="muted">${esc(c.comment)}</div></td>
+      <td>${c.props.map(p=>{const [ns,l]=p.q.split(":"); return chip(ns,l+(p.required?" ★":""))}).join("")}</td>
+      <td class="muted">${c.sources.map(esc).join("<br>")||"aucun (issu du vocabulaire)"}</td>
+      <td><a href="templates-communs/${esc(c.file)}" download>JSON</a></td></tr>`).join("")+"</tbody>";
+}
+
+function renderCompare(){
+  const cls=$("selClass").value, c=D.common.find(x=>x.class===cls);
+  $("dlClass").href="templates-communs/"+c.file;
+  const cols=D.students.filter(s=>s.status==="ok").flatMap(s=>s.templates.filter(t=>t.common===cls).map(t=>({s,t})));
+  const keys=c.props.map(p=>p.q);
+  cols.forEach(({t})=>t.props.forEach(p=>{const k=p.common||`✗ ${p.ns}:${p.local}`; if(!keys.includes(k)) keys.push(k);}));
+  let h=`<thead><tr><th>Propriété</th>${cols.map(({s,t})=>`<th class="rot"><div>Ex. ${esc(s.ex)} · ${esc(t.label)}</div></th>`).join("")}<th class="rot"><div><b>Recommandé</b></div></th></tr></thead><tbody>`;
+  for(const k of keys){
+    const reco=c.props.find(p=>p.q===k);
+    const head=k.startsWith("✗")?`<span class="chip bad" title="absente du vocabulaire commun">${esc(k)}</span>`:chip(...k.split(":"));
+    h+=`<tr><td>${head}${reco?.alt?` <span class="muted">« ${esc(reco.alt)} »</span>`:""}</td>`;
+    for(const {t} of cols){
+      const ps=t.props.filter(p=>(p.common||`✗ ${p.ns}:${p.local}`)===k);
+      if(!ps.length){ h+=`<td class="cell"></td>`; continue; }
+      const tip=ps.map(p=>`${p.ns}:${p.local}${p.altLabel?` « ${p.altLabel} »`:""}${p.required?" (obligatoire)":""} [${p.dataTypes.join(", ")||"type non précisé"}]`).join("\n");
+      const req=ps.some(p=>p.required), dts=[...new Set(ps.flatMap(p=>p.dataTypes))];
+      h+=`<td class="cell" title="${esc(tip)}">${req?"★":"●"}<div class="muted" style="font-size:.7rem">${dts.map(d=>DT[d]||"?").join("")||"∅"}</div></td>`;
+    }
+    h+=reco?`<td class="cell reco">${reco.required?"★":"●"}<div class="muted" style="font-size:.7rem">${DT[reco.dataType]}</div></td>`:`<td class="cell reco"></td>`;
+    h+="</tr>";
+  }
+  $("compare").innerHTML=h+"</tbody>";
+}
+</script>
+</body>
+</html>
