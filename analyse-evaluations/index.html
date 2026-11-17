@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analyse des évaluations</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .heat{text-align:center;font-variant-numeric:tabular-nums;font-size:.8rem;min-width:44px;cursor:default}
+  .heat.na{color:var(--muted)}
+  .stack{display:flex;gap:2px;height:14px;border-radius:4px;overflow:hidden;min-width:160px}
+  .stack i{display:block;height:100%}
+  .s-ok{background:var(--ok)} .s-part{background:var(--warn)} .s-ko{background:var(--err)} .s-na{background:var(--line)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted);margin:6px 0 10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px}
+  .grp th{text-align:center;border-bottom:0;padding-bottom:0}
+  td.self{outline:2px solid var(--accent);outline-offset:-3px}
+  .flag{font-size:.75rem;color:var(--muted)}
+  .controls label{display:inline-flex;align-items:center;gap:6px;font-size:.9rem}
+  .controls button{font:inherit;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+  th.sort{cursor:pointer} th.sort:hover{color:var(--ink)} th.sort.on{color:var(--accent)}
+  #tip{position:fixed;pointer-events:none;z-index:10;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.8rem;box-shadow:0 4px 14px rgba(0,0,0,.15);max-width:280px;display:none;white-space:pre-line}
+  #tip b{font-size:.95rem}
+  .val{font-variant-numeric:tabular-nums}
+  tr.dim td{opacity:.45}
+  .diff-pos{color:var(--ok)} .diff-neg{color:var(--err)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Analyse des évaluations croisées</h1>
+  <nav class="nav"><a href="../comparaison-vocabulaires/">Vocabulaires</a> · <a href="../comparaison-templates/">Modèles de ressources</a> · <b>Évaluations</b> · <a href="../analyse-issues/">Issues</a></nav>
+  <p class="lead">Réponses au formulaire d'évaluation des exercices (<code>response.html</code>), lues en direct depuis le <a id="src" target="_blank" rel="noopener">tableur publié</a>. Chaque réponse teste la connexion à la base Omeka S, les modes d'authentification, les opérations CRUD et donne une note d'ergonomie sur 10.</p>
+  <div class="controls">
+    <label><input type="checkbox" id="optSelf" checked> Exclure les auto-évaluations</label>
+    <label><input type="checkbox" id="optLast" checked> Garder seulement la dernière évaluation de chaque évaluateur par exercice</label>
+    <button id="reload" type="button">Recharger les données</button>
+  </div>
+  <div id="log">Chargement…</div>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <h2>Réussite par critère</h2>
+  <p class="muted">Répartition des résultats de toutes les réponses retenues, critère par critère.</p>
+  <div class="legend"><span><i class="s-ok"></i>OK</span><span><i class="s-part"></i>Partiel (« OK, KO »)</span><span><i class="s-ko"></i>KO</span><span><i class="s-na"></i>Non renseigné</span></div>
+  <div class="card scroll"><table id="criteria"></table></div>
+
+  <h2>Classement des exercices</h2>
+  <p class="muted">Pour chaque critère : part des évaluateurs qui l'ont jugé OK (partiel = ½). Score fonctionnel = moyenne de ces taux sur les critères renseignés. Désaccord = écart-type des notes d'ergonomie. Cliquer sur un en-tête pour trier.</p>
+  <div class="card scroll"><table id="ranking"></table></div>
+
+  <h2>Qui a évalué qui</h2>
+  <p class="muted">Note d'ergonomie donnée par chaque évaluateur (ligne) à chaque exercice (colonne) ; la teinte suit le score fonctionnel de la réponse. Encadré : auto-évaluation (affichée même si elle est exclue des calculs).</p>
+  <div class="card scroll matrix"><table id="cross"></table></div>
+
+  <h2>Profil des évaluateurs</h2>
+  <p class="muted">Écart au consensus = différence moyenne entre la note d'ergonomie donnée et la moyenne des autres évaluateurs du même exercice. Négatif : plus sévère que les pairs.</p>
+  <div class="card scroll"><table id="raters"></table></div>
+
+  <h2>Auto-évaluation et regard des pairs</h2>
+  <p class="muted">Pour les étudiants qui ont évalué leur propre exercice : leur dernière auto-évaluation comparée à la moyenne des autres.</p>
+  <div class="card scroll"><table id="selfcmp"></table></div>
+
+  <h2>Réponses brutes</h2>
+  <div class="controls"><input type="search" id="q" placeholder="Filtrer (évaluateur, exercice…)" size="32"></div>
+  <div class="card scroll"><table id="raw"></table></div>
+</main>
+<footer>Données chargées le <span id="gen">—</span>. Les comptes GitHub sont normalisés (minuscules, URL retirée, <code>lenaisis</code> → <code>lenaisi</code>) ; l'exercice est déduit de l'URL (<code>&lt;compte&gt;.github.io/ArtificialInquiries_&lt;n°&gt;</code>).</footer>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwF4aiwZqkgnaNUhj-3Hn4wp7d0T_ly3UNpRdqjc_0FPyn-0hN_2fFOFK3GXHLk3KI9kPhCF51ycw/pub?gid=1820839703&single=true&output=csv";
+// Critères : index de colonne dans le CSV → libellé court, groupe
+const CRIT = [
+  {i:3,  k:"base",   l:"Base OMK", g:"Connexion"},
+  {i:4,  k:"omk",    l:"Omeka",    g:"Authentification"},
+  {i:5,  k:"github", l:"GitHub",   g:"Authentification"},
+  {i:6,  k:"google", l:"Google",   g:"Authentification"},
+  {i:7,  k:"cas1",   l:"CAS",      g:"Authentification"},
+  {i:8,  k:"cas2",   l:"CAS (2ᵉ)", g:"Authentification"},
+  {i:9,  k:"c",      l:"Create",   g:"CRUD"},
+  {i:10, k:"r",      l:"Read",     g:"CRUD"},
+  {i:11, k:"u",      l:"Update",   g:"CRUD"},
+  {i:12, k:"d",      l:"Delete",   g:"CRUD"},
+];
+const RATER_ALIAS = {"lenaisis":"lenaisi"};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
+const sd = a => { if(a.length<2) return null; const m=mean(a); return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/(a.length-1)); };
+const fmt = (x,d=1) => x==null ? "—" : x.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const pctTxt = x => x==null ? "—" : Math.round(100*x)+" %";
+
+let ALL = [], sortKey = "score", sortDir = -1;
+
+$("src").href = CSV_URL;
+$("reload").onclick = load;
+$("optSelf").onchange = $("optLast").onchange = render;
+$("q").oninput = renderRaw;
+load();
+
+/* ---------- Lecture ---------- */
+function parseCSV(text){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){ row.push(f); f=""; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=""; }
+    else f+=c;
+  }
+  if(f!==""||row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+function val(s){
+  s=(s||"").trim().toUpperCase().replace(/\s+/g,"");
+  if(s==="OK") return 1; if(s==="KO") return 0; if(s==="OK,KO"||s==="KO,OK") return .5;
+  return null;
+}
+function rater(s){
+  s=(s||"").trim().replace(/^https?:\/\/(www\.)?github\.com\//i,"").replace(/\/.*$/,"").toLowerCase();
+  return RATER_ALIAS[s]||s;
+}
+function exercise(link){
+  const raw=(link||"").trim();
+  try{
+    const u=new URL(raw), seg=u.pathname.split("/").filter(Boolean), h=u.hostname.toLowerCase();
+    let owner, repo;
+    if(h.endsWith(".github.io")){ owner=h.replace(/\.github\.io$/,""); repo=seg[0]; }
+    else if(h==="github.com"){ owner=seg[0]?.toLowerCase(); repo=seg[1]; }
+    else { owner=h; repo=null; }
+    const ex = repo ? repo.replace(/^ArtificialInquiries_?/i,"") : null;
+    return { key: ex ? "ex:"+ex.toLowerCase() : "host:"+h, ex, owner, label: ex ? `Ex. ${ex} · ${owner}` : h };
+  }catch(e){ return { key:"?:"+raw, ex:null, owner:null, label: raw||"(vide)" }; }
+}
+function parseDate(s){
+  const m=(s||"").match(/(\d+)\/(\d+)\/(\d+)\s+(\d+):(\d+):(\d+)/);
+  return m ? new Date(+m[3],m[2]-1,+m[1],+m[4],+m[5],+m[6]) : null;
+}
+function exSort(a,b){
+  const n=x=>{const m=String(x.ex||"").match(/^(\d+)(.*)$/); return m?[+m[1],m[2]]:[1e9,x.label];};
+  const [x1,y1]=n(a),[x2,y2]=n(b); return x1-x2||String(y1).localeCompare(String(y2));
+}
+
+async function load(){
+  $("log").textContent="Chargement…";
+  try{
+    const r=await fetch(CSV_URL,{cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const rows=parseCSV(await r.text()).filter(r=>r.some(c=>c.trim()));
+    ALL = rows.slice(1).map((c,idx)=>{
+      const e=exercise(c[2]), who=rater(c[1]);
+      const v={}; CRIT.forEach(k=>v[k.k]=val(c[k.i]));
+      const answered=CRIT.map(k=>v[k.k]).filter(x=>x!=null);
+      const erg=parseFloat((c[13]||"").replace(",","."));
+      return { idx, date:parseDate(c[0]), dateTxt:c[0], rater:who, rawRater:(c[1]||"").trim(), link:(c[2]||"").trim(),
+        ...e, v, score: answered.length ? mean(answered) : null, nAns:answered.length,
+        erg: isNaN(erg)?null:erg, self: !!e.owner && e.owner===who };
+    });
+    $("gen").textContent=new Date().toLocaleString("fr-FR");
+    $("log").textContent="";
+    render();
+  }catch(e){
+    $("log").innerHTML=`<span class="err-msg">Impossible de lire le tableur : ${esc(e.message)}</span>`;
+  }
+}
+
+/* ---------- Sélection ---------- */
+function selection(){
+  const exclSelf=$("optSelf").checked, lastOnly=$("optLast").checked;
+  ALL.forEach(r=>{ r.superseded=false; });
+  if(lastOnly){
+    const latest={};
+    for(const r of ALL){ const k=r.rater+"|"+r.key; if(!latest[k]||r.date>=latest[k].date) latest[k]=r; }
+    ALL.forEach(r=>{ r.superseded = latest[r.rater+"|"+r.key]!==r; });
+  }
+  return ALL.filter(r=>!r.superseded && !(exclSelf&&r.self));
+}
+
+/* ---------- Rendu ---------- */
+function heatCell(p, tip){
+  if(p==null) return `<td class="heat na" data-tip="${esc(tip+"\nnon renseigné")}">·</td>`;
+  const a=.08+.62*p, light=p>.55;
+  return `<td class="heat" style="background:rgba(var(--heat),${a.toFixed(2)});${light?"color:#fff":""}" data-tip="${esc(tip)}">${Math.round(100*p)}</td>`;
+}
+
+function render(){
+  const S=selection();
+  const exMap=new Map(); ALL.forEach(r=>{ if(!exMap.has(r.key)) exMap.set(r.key,{key:r.key,ex:r.ex,owner:r.owner,label:r.label}); });
+  const raters=[...new Set(ALL.map(r=>r.rater))].sort();
+  const ergs=S.map(r=>r.erg).filter(x=>x!=null), scores=S.map(r=>r.score).filter(x=>x!=null);
+
+  $("stats").innerHTML=[
+    [S.length, `réponses retenues (sur ${ALL.length})`],
+    [new Set(S.map(r=>r.rater)).size, "évaluateurs"],
+    [new Set(S.map(r=>r.key)).size, "exercices évalués"],
+    [pctTxt(mean(scores)), "score fonctionnel moyen"],
+    [fmt(mean(ergs)), "ergonomie moyenne /10"],
+    [ALL.filter(r=>r.self).length, "auto-évaluations"],
+  ].map(([n,l])=>`<div class="stat"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
+
+  // Critères
+  let h=`<thead><tr><th>Critère</th><th>Groupe</th><th>Répartition</th><th>OK</th><th>Partiel</th><th>KO</th><th>Non renseigné</th></tr></thead><tbody>`;
+  for(const c of CRIT){
+    const vs=S.map(r=>r.v[c.k]), n=vs.length||1;
+    const cnt={ok:vs.filter(x=>x===1).length, part:vs.filter(x=>x===.5).length, ko:vs.filter(x=>x===0).length, na:vs.filter(x=>x==null).length};
+    const seg=(k,cls,lab)=>cnt[k]?`<i class="${cls}" style="flex:${cnt[k]}" data-tip="${esc(`${cnt[k]} réponse${cnt[k]>1?"s":""} (${Math.round(100*cnt[k]/n)} %)\n${c.l} — ${lab}`)}"></i>`:"";
+    h+=`<tr><td><b>${esc(c.l)}</b></td><td class="muted">${esc(c.g)}</td>
+      <td style="width:40%"><div class="stack">${seg("ok","s-ok","OK")}${seg("part","s-part","partiel")}${seg("ko","s-ko","KO")}${seg("na","s-na","non renseigné")}</div></td>
+      <td class="num">${cnt.ok}</td><td class="num">${cnt.part}</td><td class="num">${cnt.ko}</td><td class="num muted">${cnt.na}</td></tr>`;
+  }
+  $("criteria").innerHTML=h+"</tbody>";
+
+  // Classement
+  const rank=[...exMap.values()].map(e=>{
+    const rs=S.filter(r=>r.key===e.key);
+    const per={}; CRIT.forEach(c=>{ const a=rs.map(r=>r.v[c.k]).filter(x=>x!=null); per[c.k]=a.length?mean(a):null; });
+    const pv=Object.values(per).filter(x=>x!=null);
+    const eg=rs.map(r=>r.erg).filter(x=>x!=null);
+    return {...e, n:rs.length, per, score:pv.length?mean(pv):null, erg:mean(eg), sd:sd(eg)};
+  }).filter(e=>e.n);
+  const keyVal={label:e=>e.ex?null:e.label, n:e=>e.n, score:e=>e.score, erg:e=>e.erg, sd:e=>e.sd};
+  CRIT.forEach(c=>keyVal[c.k]=e=>e.per[c.k]);
+  rank.sort((a,b)=>{
+    if(sortKey==="label") return sortDir*exSort(a,b);
+    const x=keyVal[sortKey](a), y=keyVal[sortKey](b);
+    if(x==null&&y==null) return exSort(a,b); if(x==null) return 1; if(y==null) return -1;
+    return sortDir*(x-y)||exSort(a,b);
+  });
+  const th=(k,l,extra="")=>`<th class="sort ${sortKey===k?"on":""}" data-k="${k}" ${extra}>${l}${sortKey===k?(sortDir>0?" ▲":" ▼"):""}</th>`;
+  const groups=[...new Set(CRIT.map(c=>c.g))];
+  h=`<thead><tr class="grp"><th colspan="2"></th>${groups.map(g=>`<th colspan="${CRIT.filter(c=>c.g===g).length}">${esc(g)}</th>`).join("")}<th colspan="3"></th></tr>
+    <tr>${th("label","Exercice")}${th("n","Éval.")}${CRIT.map(c=>th(c.k,esc(c.l))).join("")}${th("score","Score fonctionnel")}${th("erg","Ergonomie")}${th("sd","Désaccord")}</tr></thead><tbody>`;
+  for(const e of rank){
+    const url=ALL.find(r=>r.key===e.key)?.link;
+    h+=`<tr><td><a href="${esc(url)}" target="_blank" rel="noopener">${esc(e.label)}</a></td><td class="num">${e.n}</td>`+
+      CRIT.map(c=>heatCell(e.per[c.k], `${e.label} — ${c.l}`)).join("")+
+      `<td>${pctTxt(e.score)}<div class="bar"><i style="width:${Math.round(100*(e.score||0))}%"></i></div></td>
+       <td class="num">${fmt(e.erg)}</td><td class="num">${e.sd==null?"—":fmt(e.sd)}</td></tr>`;
+  }
+  $("ranking").innerHTML=h+"</tbody>";
+  $("ranking").querySelectorAll("th.sort").forEach(t=>t.onclick=()=>{
+    const k=t.dataset.k; if(sortKey===k) sortDir=-sortDir; else { sortKey=k; sortDir=k==="label"?1:-1; } render();
+  });
+
+  // Matrice évaluateurs × exercices
+  const exCols=[...exMap.values()].sort(exSort);
+  const lastBy=(who,key)=>ALL.filter(r=>r.rater===who&&r.key===key&&!r.superseded).sort((a,b)=>b.date-a.date);
+  h=`<thead><tr><th>Évaluateur ↓ / Exercice →</th>${exCols.map(e=>`<th class="rot"><div>${esc(e.label)}</div></th>`).join("")}<th>n</th></tr></thead><tbody>`;
+  for(const who of raters){
+    let n=0;
+    const cells=exCols.map(e=>{
+      const rs=lastBy(who,e.key); if(!rs.length) return `<td class="cell"></td>`;
+      const r=rs[0], used=S.includes(r); if(used) n++;
+      const tip=`${who} → ${e.label}${r.self?" (auto-évaluation)":""}\nErgonomie : ${r.erg??"—"}/10\nScore fonctionnel : ${pctTxt(r.score)} (${r.nAns} critères renseignés)${rs.length>1?`\n${rs.length} réponses`:""}${used?"":"\nexclue des calculs"}`;
+      const a=r.score==null?0:.08+.62*r.score;
+      return `<td class="cell ${r.self?"self":""}" style="background:rgba(var(--heat),${a.toFixed(2)});${r.score>.55?"color:#fff":""}" data-tip="${esc(tip)}">${r.erg??"·"}</td>`;
+    }).join("");
+    h+=`<tr><td>${esc(who)}</td>${cells}<td class="num">${n}</td></tr>`;
+  }
+  $("cross").innerHTML=h+"</tbody>";
+
+  // Profils évaluateurs
+  const consensus=(r)=>{ const o=S.filter(x=>x.key===r.key&&x.rater!==r.rater&&x.erg!=null).map(x=>x.erg); return o.length?mean(o):null; };
+  const consensusScore=(r)=>{ const o=S.filter(x=>x.key===r.key&&x.rater!==r.rater&&x.score!=null).map(x=>x.score); return o.length?mean(o):null; };
+  const prof=raters.map(who=>{
+    const rs=S.filter(r=>r.rater===who);
+    const dE=rs.filter(r=>r.erg!=null).map(r=>{const c=consensus(r); return c==null?null:r.erg-c;}).filter(x=>x!=null);
+    const dS=rs.filter(r=>r.score!=null).map(r=>{const c=consensusScore(r); return c==null?null:r.score-c;}).filter(x=>x!=null);
+    return {who, n:rs.length, erg:mean(rs.map(r=>r.erg).filter(x=>x!=null)), score:mean(rs.map(r=>r.score).filter(x=>x!=null)),
+      dE:mean(dE), dS:mean(dS), miss:rs.filter(r=>r.erg==null).length, partial:rs.filter(r=>r.nAns<CRIT.length).length};
+  }).filter(p=>p.n).sort((a,b)=>b.n-a.n);
+  const signed=(x,d,unit="")=>x==null?"—":`<span class="${x>0.05?"diff-pos":x<-0.05?"diff-neg":""}">${x>0?"+":""}${fmt(x,d)}${unit}</span>`;
+  $("raters").innerHTML=`<thead><tr><th>Évaluateur</th><th>Évaluations</th><th>Ergonomie moyenne donnée</th><th>Écart au consensus (ergonomie)</th><th>Score fonctionnel moyen donné</th><th>Écart au consensus (fonctionnel)</th><th>Réponses incomplètes</th></tr></thead><tbody>`+
+    prof.map(p=>`<tr><td>${esc(p.who)}</td><td class="num">${p.n}</td><td class="num">${fmt(p.erg)}</td><td class="num">${signed(p.dE,1)}</td>
+      <td class="num">${pctTxt(p.score)}</td><td class="num">${p.dS==null?"—":signed(100*p.dS,0," pts")}</td>
+      <td class="num muted" style="white-space:nowrap">${[p.partial?`${p.partial} critère(s) manquant(s)`:"",p.miss?`${p.miss} sans note`:""].filter(Boolean).join(" · ")||""}</td></tr>`).join("")+"</tbody>";
+
+  // Auto-évaluation vs pairs
+  const lastOnly=$("optLast").checked;
+  const selfRows=[...exMap.values()].map(e=>{
+    const own=ALL.filter(r=>r.key===e.key&&r.self).sort((a,b)=>b.date-a.date)[0];
+    if(!own) return null;
+    let peers=ALL.filter(r=>r.key===e.key&&!r.self&&(!lastOnly||!r.superseded));
+    return {e, own, n:peers.length, pE:mean(peers.map(r=>r.erg).filter(x=>x!=null)), pS:mean(peers.map(r=>r.score).filter(x=>x!=null))};
+  }).filter(Boolean).sort((a,b)=>exSort(a.e,b.e));
+  $("selfcmp").innerHTML=`<thead><tr><th>Exercice</th><th>Ergonomie (auto)</th><th>Ergonomie (pairs)</th><th>Écart</th><th>Fonctionnel (auto)</th><th>Fonctionnel (pairs)</th><th>Écart</th><th>Pairs</th></tr></thead><tbody>`+
+    (selfRows.length?selfRows.map(s=>`<tr><td>${esc(s.e.label)}</td>
+      <td class="num">${s.own.erg??"—"}</td><td class="num">${fmt(s.pE)}</td><td class="num">${s.own.erg!=null&&s.pE!=null?signed(s.own.erg-s.pE,1):"—"}</td>
+      <td class="num">${pctTxt(s.own.score)}</td><td class="num">${pctTxt(s.pS)}</td><td class="num">${s.own.score!=null&&s.pS!=null?signed(100*(s.own.score-s.pS),0," pts"):"—"}</td>
+      <td class="num">${s.n}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">Aucune auto-évaluation.</td></tr>`)+"</tbody>";
+
+  renderRaw();
+}
+
+function renderRaw(){
+  const S=new Set(selection()), q=$("q").value.trim().toLowerCase();
+  const sym=x=>x===1?`<span class="badge b-ok">OK</span>`:x===0?`<span class="badge b-err">KO</span>`:x===.5?`<span class="badge b-warn">±</span>`:`<span class="muted">·</span>`;
+  const rows=ALL.filter(r=>!q||[r.rater,r.rawRater,r.label,r.link].join(" ").toLowerCase().includes(q)).sort((a,b)=>b.date-a.date);
+  $("raw").innerHTML=`<thead><tr><th>Date</th><th>Évaluateur</th><th>Exercice</th>${CRIT.map(c=>`<th>${esc(c.l)}</th>`).join("")}<th>Ergo.</th><th>Statut</th></tr></thead><tbody>`+
+    rows.map(r=>`<tr class="${S.has(r)?"":"dim"}"><td class="muted" style="white-space:nowrap">${esc(r.dateTxt)}</td>
+      <td>${esc(r.rater)}${r.rawRater.toLowerCase()!==r.rater?`<div class="flag">${esc(r.rawRater)}</div>`:""}</td>
+      <td><a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.label)}</a></td>
+      ${CRIT.map(c=>`<td>${sym(r.v[c.k])}</td>`).join("")}
+      <td class="num">${r.erg??"—"}</td>
+      <td class="flag">${[r.self?"auto-évaluation":"", r.superseded?"remplacée par une réponse plus récente":""].filter(Boolean).join(" · ")}</td></tr>`).join("")+"</tbody>";
+}
+
+/* ---------- Infobulle ---------- */
+const tip=$("tip");
+document.addEventListener("pointermove",ev=>{
+  const t=ev.target.closest?.("[data-tip]");
+  if(!t){ tip.style.display="none"; return; }
+  const [first,...rest]=t.dataset.tip.split("\n");
+  tip.textContent=""; const b=document.createElement("b"); b.textContent=first; tip.append(b);
+  if(rest.length) tip.append(document.createTextNode("\n"+rest.join("\n")));
+  tip.style.display="block";
+  const w=tip.offsetWidth, hgt=tip.offsetHeight;
+  tip.style.left=Math.min(ev.clientX+14, innerWidth-w-8)+"px";
+  tip.style.top=(ev.clientY+hgt+20>innerHeight? ev.clientY-hgt-10 : ev.clientY+14)+"px";
+});
+</script>
+</body>
+</html>

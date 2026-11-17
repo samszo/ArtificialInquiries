@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analyse des issues</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .heat{text-align:center;font-variant-numeric:tabular-nums;font-size:.8rem;cursor:default}
+  td.self{outline:2px solid var(--accent);outline-offset:-3px}
+  .stack{display:flex;gap:2px;height:12px;border-radius:4px;overflow:hidden;min-width:110px}
+  .stack i{display:block;height:100%}
+  .n-bug{background:var(--err)} .n-mix{background:var(--warn)} .n-ok{background:var(--ok)} .n-other{background:var(--line)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted);margin:6px 0 10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px}
+  .hbar{display:grid;grid-template-columns:minmax(120px,190px) 1fr 40px;gap:8px;align-items:center;font-size:.88rem;padding:3px 0;cursor:pointer;border-radius:6px}
+  .hbar:hover,.hbar.on{background:rgba(var(--heat),.08)}
+  .hbar .track{height:12px}
+  .hbar .track i{display:block;height:100%;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}
+  .hbar b{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .timeline{display:flex;align-items:flex-end;gap:2px;height:150px;border-bottom:1px solid var(--line);padding-top:8px}
+  .timeline div{flex:1;min-width:6px;display:flex;flex-direction:column-reverse;gap:2px;height:100%;cursor:default}
+  .timeline div i{display:block;border-radius:0}
+  .timeline div i:last-child{border-radius:4px 4px 0 0}
+  .tl-axis{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:4px}
+  .controls label{display:inline-flex;align-items:center;gap:6px;font-size:.9rem}
+  .controls button{font:inherit;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+  #tip{position:fixed;pointer-events:none;z-index:10;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.8rem;box-shadow:0 4px 14px rgba(0,0,0,.15);max-width:320px;display:none;white-space:pre-line}
+  #tip b{font-size:.95rem}
+  .excerpt{color:var(--muted);font-size:.8rem;max-width:520px}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+  .two h3{font-size:.95rem;margin:0 0 8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Analyse des issues GitHub</h1>
+  <nav class="nav"><a href="../comparaison-vocabulaires/">Vocabulaires</a> · <a href="../comparaison-templates/">Modèles de ressources</a> · <a href="../analyse-evaluations/">Évaluations</a> · <b>Issues</b></nav>
+  <p class="lead">Issues ouvertes sur les dépôts <code>ArtificialInquiries_*</code> des exercices listés dans le <a id="src" target="_blank" rel="noopener">tableur d'évaluation</a>. Les données viennent en direct de l'API GitHub, sans authentification (limite : 60 requêtes par heure). Elles restent en cache 10 minutes dans ce navigateur.</p>
+  <div class="controls">
+    <label><input type="checkbox" id="optSelf"> Exclure les issues que l'étudiant a ouvertes sur son propre dépôt</label>
+    <button id="reload" type="button">Recharger depuis GitHub</button>
+  </div>
+  <div id="log">Chargement…</div>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <h2>Par dépôt</h2>
+  <p class="muted">Nature et thèmes sont déduits automatiquement des mots du titre et du texte de chaque issue. C'est une indication, pas un classement manuel.</p>
+  <div class="legend"><span><i class="n-bug"></i>Problème signalé</span><span><i class="n-mix"></i>Mixte</span><span><i class="n-ok"></i>Retour positif</span><span><i class="n-other"></i>Autre</span></div>
+  <div class="card scroll"><table id="repos"></table></div>
+
+  <h2>Qui a signalé quoi, et où</h2>
+  <p class="muted">Nombre d'issues ouvertes par chaque auteur (ligne) sur chaque dépôt (colonne). Encadré : l'étudiant a ouvert l'issue sur son propre dépôt. La colonne « Formulaire » donne le nombre de réponses de cette personne au formulaire d'évaluation, pour comparer.</p>
+  <div class="card scroll matrix"><table id="cross"></table></div>
+
+  <div class="two">
+    <div>
+      <h2>Thèmes abordés</h2>
+      <p class="muted">Issues qui mentionnent chaque thème. Cliquer pour filtrer la liste.</p>
+      <div class="card" id="themes"></div>
+    </div>
+    <div>
+      <h2>Chronologie</h2>
+      <p class="muted">Issues créées par jour, selon leur nature.</p>
+      <div class="card"><div class="timeline" id="timeline"></div><div class="tl-axis" id="tlaxis"></div></div>
+    </div>
+  </div>
+
+  <h2>Liste des issues</h2>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Rechercher…" size="26">
+    <select id="fRepo"><option value="">Tous les dépôts</option></select>
+    <select id="fTheme"><option value="">Tous les thèmes</option></select>
+    <select id="fNature"><option value="">Toutes natures</option></select>
+    <select id="fState"><option value="">Ouvertes et fermées</option><option value="open">Ouvertes</option><option value="closed">Fermées</option></select>
+    <span class="muted" id="count"></span>
+  </div>
+  <div class="card scroll"><table id="list"></table></div>
+</main>
+<footer>Données chargées le <span id="gen">—</span>. Les pull requests sont exclues. Dépôt déduit de l'URL de l'exercice (<code>&lt;compte&gt;.github.io/ArtificialInquiries_&lt;n°&gt;</code> → <code>github.com/&lt;compte&gt;/ArtificialInquiries_&lt;n°&gt;</code>).</footer>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwF4aiwZqkgnaNUhj-3Hn4wp7d0T_ly3UNpRdqjc_0FPyn-0hN_2fFOFK3GXHLk3KI9kPhCF51ycw/pub?gid=1820839703&single=true&output=csv";
+const CACHE_KEY = "artinq-issues-v1", CACHE_MS = 10*60*1000;
+const RATER_ALIAS = {"lenaisis":"lenaisi"};
+
+// Thèmes : motifs appliqués au titre + texte, sans accents, en minuscules
+const THEMES = [
+  ["Omeka / clé API", /omeka|cle(s)? api|key_identity|key_credential|identifiant/],
+  ["Google", /google|oauth/],
+  ["GitHub", /github/],
+  ["CAS Paris 8", /\bcas\b/],
+  ["CRUD", /crud|creat|ajout|modifi|supprim|update|delete|lecture seule/],
+  ["Erreur HTTP", /\b(40[0-9]|50[0-9])\b|not found|forbidden|permission denied/],
+  ["CORS / proxy", /cors|proxy|access-control/],
+  ["Sécurité", /securi|sans verification|aleatoire|secret|token|expos/],
+  ["Interface / ergonomie", /ergonom|affichage|bouton|lisib|visible|couleur|navigation|responsive|ux\b|design/],
+  ["Session / déconnexion", /session|deconnex|actualis|rafraich|localstorage/],
+  ["Données / classes", /classe|item|propriet|vocabulaire|modele|template/],
+];
+const NEG = /erreur|error|bug|echec|impossible|ne fonctionne pas|ne marche pas|bloqu|refus|illisible|probleme|\bko\b|not found|denied|invalid|manquant|absen|sans verification|incorrect|\bpas de\b|n'est pas|ne sont pas|n'a pas|peu (visible|lisible)|perte|non autoris|instab|manque|plant|crash|faille|vulnerab|\b40[0-9]\b|\b50[0-9]\b|\bmal\b|mauvais|trompeu|inaccessib|non (configur|precis|affich|dispon|active|lie)|dysfonction|n'importe qui|\b(ne|n')\b[^.]{0,30}\bpas\b/;
+const POS = /\bok\b|aucun probleme|fonctionne(nt)?\b(?! pas)|succes|reussi|tout marche|correctement|valide/;
+const NEUTRALIZE = /aucun(e)? (probleme|erreur|souci)|sans (probleme|erreur|souci)|pas de (probleme|erreur|souci)/g;
+const NATURES = [["bug","Problème signalé","n-bug"],["mix","Mixte","n-mix"],["ok","Retour positif","n-ok"],["other","Autre","n-other"]];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s => (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const day = iso => iso.slice(0,10);
+const frDate = iso => new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit"});
+const pct = (n,d) => d ? Math.round(100*n/d) : 0;
+
+let REPOS = [], ISSUES = [], FORM = {}, themeFilter = "";
+
+$("src").href = CSV_URL;
+$("reload").onclick = () => load(true);
+$("optSelf").onchange = render;
+["q","fRepo","fTheme","fNature","fState"].forEach(id => $(id).addEventListener("input", renderList));
+NATURES.forEach(([k,l]) => $("fNature").insertAdjacentHTML("beforeend", `<option value="${k}">${esc(l)}</option>`));
+THEMES.forEach(([l]) => $("fTheme").insertAdjacentHTML("beforeend", `<option>${esc(l)}</option>`));
+load(false);
+
+/* ---------- Tableur → dépôts ---------- */
+function parseCSV(text){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){ row.push(f); f=""; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=""; }
+    else f+=c;
+  }
+  if(f!==""||row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+function repoFromLink(link){
+  try{
+    const u=new URL((link||"").trim()), seg=u.pathname.split("/").filter(Boolean), h=u.hostname.toLowerCase();
+    let owner, repo;
+    if(h.endsWith(".github.io")){ owner=h.replace(/\.github\.io$/,""); repo=seg[0]; }
+    else if(h==="github.com"){ owner=seg[0]; repo=seg[1]; }
+    if(!owner||!repo||!/^ArtificialInquiries/i.test(repo)) return null;
+    return { owner:owner.toLowerCase(), repo, ex:repo.replace(/^ArtificialInquiries_?/i,"") };
+  }catch(e){ return null; }
+}
+function rater(s){
+  s=(s||"").trim().replace(/^https?:\/\/(www\.)?github\.com\//i,"").replace(/\/.*$/,"").toLowerCase();
+  return RATER_ALIAS[s]||s;
+}
+function exSort(a,b){
+  const n=x=>{const m=String(x).match(/^(\d+)(.*)$/); return m?[+m[1],m[2]]:[1e9,String(x)];};
+  const [x1,y1]=n(a.ex),[x2,y2]=n(b.ex); return x1-x2||y1.localeCompare(y2);
+}
+
+/* ---------- GitHub ---------- */
+async function ghAll(url){
+  const out=[];
+  while(url){
+    const r=await fetch(url,{headers:{Accept:"application/vnd.github+json"}});
+    if(r.status===404) return {missing:true};
+    if(r.status===403||r.status===429){
+      const reset=r.headers.get("x-ratelimit-reset");
+      throw new Error("limite de l'API GitHub atteinte"+(reset?` — réessayer après ${new Date(reset*1000).toLocaleTimeString("fr-FR")}`:""));
+    }
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    out.push(...await r.json());
+    url=(r.headers.get("link")||"").match(/<([^>]+)>;\s*rel="next"/)?.[1];
+  }
+  return {items:out};
+}
+
+async function load(force){
+  $("log").textContent="Lecture du tableur…";
+  try{
+    const rows=parseCSV(await (await fetch(CSV_URL,{cache:"no-store"})).text()).slice(1);
+    FORM={}; const map=new Map();
+    for(const c of rows){
+      const who=rater(c[1]); if(who) FORM[who]=(FORM[who]||0)+1;
+      const r=repoFromLink(c[2]); if(r){ const k=(r.owner+"/"+r.repo).toLowerCase(); if(!map.has(k)) map.set(k,r); }
+    }
+    REPOS=[...map.values()].sort(exSort);
+
+    let cache=null;
+    try{ cache=JSON.parse(sessionStorage.getItem(CACHE_KEY)); }catch(e){}
+    const keys=REPOS.map(r=>r.owner+"/"+r.repo).join(",");
+    if(!force && cache && cache.keys===keys && Date.now()-cache.t<CACHE_MS){
+      ISSUES=cache.issues; REPOS.forEach(r=>r.missing=cache.missing.includes(r.owner+"/"+r.repo));
+      finish(cache.t); return;
+    }
+    ISSUES=[]; let i=0;
+    for(const r of REPOS){
+      $("log").textContent=`Lecture des issues GitHub… ${++i}/${REPOS.length} (${r.owner}/${r.repo})`;
+      const res=await ghAll(`https://api.github.com/repos/${r.owner}/${r.repo}/issues?state=all&per_page=100`);
+      r.missing=!!res.missing;
+      for(const it of res.items||[]){
+        if(it.pull_request) continue;
+        ISSUES.push({repo:r.owner+"/"+r.repo, number:it.number, title:it.title, body:(it.body||""), url:it.html_url,
+          state:it.state, reason:it.state_reason, author:(it.user?.login||"").toLowerCase(), comments:it.comments,
+          created:it.created_at, closed:it.closed_at, labels:it.labels.map(l=>l.name)});
+      }
+    }
+    const t=Date.now();
+    try{ sessionStorage.setItem(CACHE_KEY, JSON.stringify({t,keys,issues:ISSUES,missing:REPOS.filter(r=>r.missing).map(r=>r.owner+"/"+r.repo)})); }catch(e){}
+    finish(t);
+  }catch(e){
+    $("log").innerHTML=`<span class="err-msg">Échec du chargement : ${esc(e.message)}</span>`;
+  }
+}
+
+function finish(t){
+  for(const is of ISSUES){
+    const txt=norm(is.title+"\n"+is.body);
+    is.themes=THEMES.filter(([,re])=>re.test(txt)).map(([l])=>l);
+    // « aucun problème » est un signal positif, pas négatif
+    const t=norm(is.title), b=norm(is.body), tN=t.replace(NEUTRALIZE,"ok"), bN=b.replace(NEUTRALIZE,"ok");
+    const tNeg=NEG.test(tN), tPos=POS.test(tN), bNeg=NEG.test(bN), bPos=POS.test(bN);
+    // Le titre l'emporte ; le texte nuance (un titre positif avec des remarques négatives = mixte)
+    is.nature = tNeg&&tPos ? "mix" : tNeg ? "bug" : tPos ? (bNeg?"mix":"ok")
+      : bNeg&&bPos ? "mix" : bNeg ? "bug" : bPos ? "ok" : "other";
+    is.owner=is.repo.split("/")[0].toLowerCase();
+    is.self=is.author===is.owner;
+  }
+  $("gen").textContent=new Date(t).toLocaleString("fr-FR");
+  $("log").textContent="";
+  $("fRepo").innerHTML=`<option value="">Tous les dépôts</option>`+REPOS.filter(r=>!r.missing).map(r=>`<option value="${esc(r.owner+"/"+r.repo)}">Ex. ${esc(r.ex)} · ${esc(r.owner)}</option>`).join("");
+  render();
+}
+
+/* ---------- Rendu ---------- */
+const selected = () => $("optSelf").checked ? ISSUES.filter(i=>!i.self) : ISSUES;
+const repoLabel = k => { const r=REPOS.find(x=>x.owner+"/"+x.repo===k); return r?`Ex. ${r.ex} · ${r.owner}`:k; };
+function natureStack(list){
+  const n=list.length||1;
+  return `<div class="stack">${NATURES.map(([k,l,cls])=>{const c=list.filter(i=>i.nature===k).length;
+    return c?`<i class="${cls}" style="flex:${c}" data-tip="${esc(`${c} issue${c>1?"s":""} (${pct(c,n)} %)\n${l}`)}"></i>`:"";}).join("")}</div>`;
+}
+
+function render(){
+  const I=selected(), ok=REPOS.filter(r=>!r.missing);
+  const authors=new Set(I.map(i=>i.author));
+  const open=I.filter(i=>i.state==="open").length, answered=I.filter(i=>i.comments>0).length;
+  $("stats").innerHTML=[
+    [ok.length+(REPOS.length>ok.length?` / ${REPOS.length}`:""), "dépôts accessibles"],
+    [I.length, "issues"],
+    [`${pct(open,I.length)} %`, `ouvertes (${open})`],
+    [authors.size, "auteurs distincts"],
+    [`${pct(answered,I.length)} %`, "avec au moins un commentaire"],
+    [`${pct(I.filter(i=>i.nature==="bug").length,I.length)} %`, "signalent un problème"],
+  ].map(([n,l])=>`<div class="stat"><b>${n}</b><span>${esc(l)}</span></div>`).join("");
+
+  // Par dépôt
+  let h=`<thead><tr><th>Exercice</th><th>Issues</th><th>Ouvertes</th><th>Fermées</th><th>Auteurs externes</th><th>Par l'étudiant</th><th>Commentées</th><th>Nature</th><th>Thèmes principaux</th><th>Dernière</th></tr></thead><tbody>`;
+  for(const r of REPOS){
+    const k=r.owner+"/"+r.repo, gh=`https://github.com/${k}/issues`;
+    const lab=`<a href="${esc(gh)}" target="_blank" rel="noopener">Ex. ${esc(r.ex)} · ${esc(r.owner)}</a>`;
+    if(r.missing){ h+=`<tr><td>${lab}</td><td colspan="9"><span class="badge b-err">introuvable</span> <span class="muted">dépôt privé, renommé ou supprimé (404)</span></td></tr>`; continue; }
+    const L=I.filter(i=>i.repo===k);
+    const th={}; L.forEach(i=>i.themes.forEach(t=>th[t]=(th[t]||0)+1));
+    const top=Object.entries(th).sort((a,b)=>b[1]-a[1]).slice(0,4);
+    const ext=new Set(L.filter(i=>!i.self).map(i=>i.author));
+    const last=L.map(i=>i.created).sort().pop();
+    h+=`<tr><td>${lab}</td><td class="num"><b>${L.length}</b></td><td class="num">${L.filter(i=>i.state==="open").length}</td>
+      <td class="num">${L.filter(i=>i.state==="closed").length||""}</td>
+      <td class="num" title="${esc([...ext].join(", "))}">${ext.size}</td><td class="num">${L.filter(i=>i.self).length||""}</td>
+      <td class="num">${L.filter(i=>i.comments>0).length||""}</td>
+      <td>${L.length?natureStack(L):""}</td>
+      <td>${top.map(([t,c])=>`<span class="chip">${esc(t)} ${c}</span>`).join("")}</td>
+      <td class="muted">${last?frDate(last):"—"}</td></tr>`;
+  }
+  $("repos").innerHTML=h+"</tbody>";
+
+  // Matrice auteurs × dépôts
+  const cols=ok.map(r=>r.owner+"/"+r.repo);
+  const people=[...new Set([...ISSUES.map(i=>i.author)])].sort();
+  const max=Math.max(1,...people.flatMap(p=>cols.map(c=>I.filter(i=>i.author===p&&i.repo===c).length)));
+  h=`<thead><tr><th>Auteur ↓ / Dépôt →</th>${cols.map(c=>`<th class="rot"><div>${esc(repoLabel(c))}</div></th>`).join("")}<th>Total</th><th>Dépôts</th><th>Formulaire</th></tr></thead><tbody>`;
+  for(const p of people){
+    let tot=0, nr=0;
+    const cells=cols.map(c=>{
+      const L=I.filter(i=>i.author===p&&i.repo===c), self=c.split("/")[0].toLowerCase()===p;
+      if(!L.length) return `<td class="cell ${self?"self":""}"></td>`;
+      tot+=L.length; nr++;
+      const a=.12+.58*L.length/max;
+      const tip=`${p} → ${repoLabel(c)}${self?" (son propre dépôt)":""}\n`+L.map(i=>`#${i.number} ${i.title}`).join("\n");
+      return `<td class="cell heat ${self?"self":""}" style="background:rgba(var(--heat),${a.toFixed(2)});${a>.5?"color:#fff":""}" data-tip="${esc(tip)}">${L.length}</td>`;
+    }).join("");
+    h+=`<tr><td>${esc(p)}</td>${cells}<td class="num"><b>${tot||""}</b></td><td class="num">${nr||""}</td><td class="num muted">${FORM[p]||""}</td></tr>`;
+  }
+  $("cross").innerHTML=h+"</tbody>";
+
+  // Thèmes
+  const tc=THEMES.map(([l])=>[l,I.filter(i=>i.themes.includes(l))]).sort((a,b)=>b[1].length-a[1].length);
+  const tmax=Math.max(1,...tc.map(([,L])=>L.length));
+  $("themes").innerHTML=tc.map(([l,L])=>`<div class="hbar ${themeFilter===l?"on":""}" data-theme="${esc(l)}" tabindex="0"
+      data-tip="${esc(`${L.length} issue${L.length>1?"s":""} (${pct(L.length,I.length)} %)\n${l}\n${NATURES.map(([k,nl])=>`${nl} : ${L.filter(i=>i.nature===k).length}`).join("\n")}`)}">
+      <span>${esc(l)}</span><span class="track"><i style="width:${100*L.length/tmax}%"></i></span><b>${L.length}</b></div>`).join("");
+  $("themes").querySelectorAll(".hbar").forEach(el=>el.onclick=el.onkeydown=ev=>{
+    if(ev.type==="keydown"&&ev.key!=="Enter") return;
+    themeFilter = themeFilter===el.dataset.theme ? "" : el.dataset.theme;
+    $("fTheme").value=themeFilter; render();
+  });
+
+  // Chronologie
+  const tl=$("timeline"); tl.innerHTML=""; $("tlaxis").innerHTML="";
+  if(I.length){
+    // Par heure si la période est courte (≤ 3 jours), sinon par jour — en heure locale
+    const ts=I.map(i=>+new Date(i.created)), lo=Math.min(...ts), hi=Math.max(...ts);
+    const hourly=hi-lo<=3*864e5, step=hourly?36e5:864e5;
+    const floor=x=>{const d=new Date(x); if(hourly) d.setMinutes(0,0,0); else d.setHours(0,0,0,0); return +d;};
+    const buckets=[]; for(let b=floor(lo); b<=hi; b+=step) buckets.push(b);
+    const per=buckets.map(b=>I.filter(i=>floor(+new Date(i.created))===b));
+    const m=Math.max(1,...per.map(L=>L.length)), unit=hourly?"heure":"jour";
+    const lab=b=>new Date(b).toLocaleString("fr-FR",hourly?{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}:{weekday:"long",day:"numeric",month:"long"});
+    tl.innerHTML=per.map((L,j)=>`<div data-tip="${esc(`${L.length} issue${L.length>1?"s":""}\n${lab(buckets[j])}${hourly?" (+1 h)":""}\n${NATURES.map(([k,nl])=>`${nl} : ${L.filter(i=>i.nature===k).length}`).join("\n")}`)}">`+
+      NATURES.map(([k,,cls])=>{const c=L.filter(i=>i.nature===k).length; return c?`<i class="${cls}" style="height:${100*c/m}%"></i>`:"";}).join("")+`</div>`).join("");
+    const short=b=>new Date(b).toLocaleString("fr-FR",hourly?{day:"2-digit",month:"2-digit",hour:"2-digit"}:{day:"2-digit",month:"2-digit"})+(hourly?" h":"");
+    $("tlaxis").innerHTML=`<span>${short(buckets[0])}</span><span>max ${m} par ${unit}</span><span>${short(buckets[buckets.length-1])}</span>`;
+  }
+  renderList();
+}
+
+function renderList(){
+  const q=norm($("q").value.trim()), fr=$("fRepo").value, ft=$("fTheme").value, fn=$("fNature").value, fs=$("fState").value;
+  themeFilter=ft;
+  const L=selected().filter(i=>(!fr||i.repo===fr)&&(!ft||i.themes.includes(ft))&&(!fn||i.nature===fn)&&(!fs||i.state===fs)
+    &&(!q||norm([i.title,i.body,i.author,i.repo].join(" ")).includes(q))).sort((a,b)=>b.created.localeCompare(a.created));
+  $("count").textContent=`${L.length} issue${L.length>1?"s":""}`;
+  const nat=Object.fromEntries(NATURES.map(([k,l,c])=>[k,[l,c]]));
+  $("list").innerHTML=`<thead><tr><th>Date</th><th>Dépôt</th><th>Issue</th><th>Auteur</th><th>Nature</th><th>Thèmes</th><th>État</th><th>Comm.</th></tr></thead><tbody>`+
+    L.map(i=>{
+      const ex=i.body.replace(/\s+/g," ").trim().slice(0,180);
+      return `<tr><td class="muted" style="white-space:nowrap">${frDate(i.created)}</td><td style="white-space:nowrap">${esc(repoLabel(i.repo))}</td>
+      <td><a href="${esc(i.url)}" target="_blank" rel="noopener">#${i.number} ${esc(i.title)}</a>${ex?`<div class="excerpt">${esc(ex)}${i.body.length>180?"…":""}</div>`:""}</td>
+      <td>${esc(i.author)}${i.self?`<div class="muted" style="font-size:.75rem">son dépôt</div>`:""}</td>
+      <td style="white-space:nowrap"><span class="dot ${nat[i.nature][1]}" style="width:10px;height:10px"></span> ${esc(nat[i.nature][0])}</td>
+      <td>${i.themes.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</td>
+      <td>${i.state==="open"?`<span class="badge b-ok">ouverte</span>`:`<span class="badge b-warn">fermée</span>`}</td>
+      <td class="num">${i.comments||""}</td></tr>`;}).join("")+"</tbody>";
+}
+
+/* ---------- Infobulle ---------- */
+const tip=$("tip");
+document.addEventListener("pointermove",ev=>{
+  const t=ev.target.closest?.("[data-tip]");
+  if(!t){ tip.style.display="none"; return; }
+  const [first,...rest]=t.dataset.tip.split("\n");
+  tip.textContent=""; const b=document.createElement("b"); b.textContent=first; tip.append(b);
+  if(rest.length) tip.append(document.createTextNode("\n"+rest.join("\n")));
+  tip.style.display="block";
+  const w=tip.offsetWidth, hgt=tip.offsetHeight;
+  tip.style.left=Math.min(ev.clientX+14, innerWidth-w-8)+"px";
+  tip.style.top=(ev.clientY+hgt+20>innerHeight? ev.clientY-hgt-10 : ev.clientY+14)+"px";
+});
+</script>
+</body>
+</html>
