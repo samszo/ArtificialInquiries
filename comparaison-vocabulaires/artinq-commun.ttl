@@ -22,6 +22,11 @@
 # CLASSES
 # ────────────────────────────────────────────────────────────
 
+artinq:Enquete a rdfs:Class ;
+    rdfs:label "Enquête"@fr, "Inquiry"@en ;
+    rdfs:comment "Instance d'une enquête faite par un participant"@fr ;
+    vs:term_status "testing" .
+
 artinq:Participant a rdfs:Class ;
     rdfs:label "Participant"@fr, "Participant"@en ;
     rdfs:comment "Personne qui réalise un ou plusieurs exercices du vademecum."@fr ;
